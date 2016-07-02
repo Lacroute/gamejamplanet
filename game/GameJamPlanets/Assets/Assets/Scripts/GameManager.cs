@@ -161,20 +161,33 @@ public class GameManager : MonoBehaviour {
 			json_pending_message = www.text;
 			Debug.Log (json_pending_message);
 
-			//pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel>(json_pending_message);
-
-			//list_pending_DB
-
 			//Traitement du json récupéré, on sépare chaque json du tableau 
 			json_pending_message = json_pending_message.Remove(0,1);
 			json_pending_message = json_pending_message.Remove(json_pending_message.Length-1,1);
 
-			char[] tab = { ']', '[' };
-			string[] substrings = json_pending_message.Split(tab);
-			//substrings = substrings.Split('[');
+			string[] pendingMessages = json_pending_message.Split(new string[] { "},{" }, System.StringSplitOptions.None);
 
-			foreach (var substring in substrings)
-				Debug.Log(substring);
+			for(int i = 0; i < pendingMessages.Length; i++) 
+			{
+				if(i == 0)
+					pendingMessages[i] = pendingMessages[i] + "}";
+				else if(i == pendingMessages.Length-1)
+					pendingMessages[i] = "{" + pendingMessages[i];
+				else
+					pendingMessages[i] = "{" + pendingMessages[i] + "}";
+
+				Debug.Log (pendingMessages[i]);
+
+				pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel>(pendingMessages[i]);
+				list_pending_DB.Add (pending_DB_model);
+			}
+		
+			foreach (var message in list_pending_DB) 
+			{
+				
+				Debug.Log (message.status + " " + message.data + " " + message.echo_count + " " + message.author_id + " " + message.target_id );
+
+			}
 
 			//Debug.Log (json_pending_message);
 			//Debug.Log (pending_DB_model.status + " " + pending_DB_model.data + " " + pending_DB_model.echo_count + " " + pending_DB_model.author_id + " " + pending_DB_model.target_id );
@@ -252,6 +265,8 @@ public class GameManager : MonoBehaviour {
 		//instanciation json et class modele pour la database
 		player_DB_model = new PlayerDBModel();
 		json_player_DB_model = JsonUtility.ToJson(player_DB_model);
+
+		list_pending_DB = new List<PendingMessageDBModel> ();
 		pending_DB_model = new PendingMessageDBModel ();
 		json_pending_message = JsonUtility.ToJson(pending_DB_model);
 
