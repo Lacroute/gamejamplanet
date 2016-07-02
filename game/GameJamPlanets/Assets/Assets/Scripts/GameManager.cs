@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour {
 	
 
 	//UI
-
+	public InputField inputfield;
 
 
 
@@ -31,7 +32,6 @@ public class GameManager : MonoBehaviour {
 
 	public void setGameState(gameState gs)
 	{
-		Debug.Log("OldState: " + current_game_state);
 		current_game_state = gs;
 
 		if (current_game_state == gameState.initializationGame) 
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour {
 		{
 			//string dt = JsonUtility.ToJson(data);
 			Player player  = new Player(2, null, null);
+			Debug.Log ("New player! Id: " + player.hexid);
 			return player;
 		}
 	}
@@ -126,17 +127,21 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		inputfield = GameObject.Find ("Canvas").transform.GetChild(0).transform.GetChild(0).GetComponent<InputField>();
 		//on lan	ce le jeu, state = initializationGame 
 		setGameState(gameState.initializationGame);
 
 		//get id du player
 		this.current_player = playerConnection();
-		current_player.displayInfo();
+
+
+		current_player.writeMessage();
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
+		
 		
 	}
 }
