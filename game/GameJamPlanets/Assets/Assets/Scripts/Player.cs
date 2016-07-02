@@ -13,11 +13,11 @@ public class Player{
 
 
 	public int hexid; //ok
-	private List<Message> pending_messages;
+	public List<Message> pending_messages;//ok
 	//private List<Message> send_messages;
-	Message current_message; //ok
-	bool current_message_bool; //ok
-	GameManager gameManagerScript; //ok
+	public Message current_message; //ok
+	public bool current_message_bool; //ok
+	public GameManager gameManagerScript; //ok
 
 
 	public Player(int id, List<Message> pm, Message cm, bool b)
@@ -29,9 +29,24 @@ public class Player{
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
+	public void setPendingsMessages(List<Message> list)
+	{
+		this.pending_messages = list;
+	}
+
+	public void addPendingMessage(Message message)
+	{
+		//chekc a faire si message existe
+		this.pending_messages.Add (message);
+	}
+	
 	public void displayInfo()
 	{
 		Debug.Log ("Id: " + this.hexid + " / Pending messages: " + this.pending_messages + " / Current message : " + this.current_message);
+		foreach (var message in pending_messages) 
+		{
+			message.displayMessageInfo ();
+		}
 	}
 
 	public void writeMessage()
