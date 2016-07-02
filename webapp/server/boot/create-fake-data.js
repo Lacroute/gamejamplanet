@@ -23,9 +23,9 @@ module.exports = function(app) {
       var Player = app.models.Player;
 
       Player.create([
-        {"message_sent": false, "message_count": 0},
-        {"message_sent": false, "message_count": 0},
-        {"message_sent": false, "message_count": 0}
+        {"message_sent": true, "message_count": 0},
+        {"message_sent": true, "message_count": 0},
+        {"message_sent": true, "message_count": 0}
       ], cb);
   }
 

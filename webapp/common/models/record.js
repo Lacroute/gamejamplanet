@@ -20,4 +20,15 @@ module.exports = function(Record) {
     }
   );
 
+
+  Record.observe('before delete', function(context, next) {
+    Record.app.models.Player.findOne(
+      { where: context.where }, function(err, player) {
+        player.message_sent = false;
+        player.save();
+    });
+
+    next();
+  });
+
 };

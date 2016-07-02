@@ -6,8 +6,6 @@ module.exports = function(Player) {
   //   next();
   // });
   Player.afterCreate = function(next) {
-    console.log('Time to create pending box ?');
-
     Player.app.models.Pendingbox.create({handle_id: this.id}, next);
   }
 
@@ -19,7 +17,7 @@ module.exports = function(Player) {
     });
 
     Player.app.models.Record.findOne(
-      {where:{id:inst.id}}, function(err, res){
+      {where:{id:inst.id}},function(err, res){
       res.target_id = res.author_id;
       res.save();
     });
