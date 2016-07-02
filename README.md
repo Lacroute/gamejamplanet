@@ -1,4 +1,15 @@
 # URL
+0.0.0.0:3000/api
+
+
+
+# Spin up the server
+cd webapp
+node .
+
+
+
+# Methods
 
 ## Créer un Player
 POST /Players {"hexid": "hexadecimal_color_code"}
@@ -25,3 +36,12 @@ Gestion des records reçus
 
 ## Récupérer les pendings d'un Player
 GET /Pendingboxes/{id_player}/target
+
+## Modifier la target d'un Record
+PUT /Record/{id_record}
+{ "status": {new_status},
+  "data": "KEEP THE DATA",
+  "echo_count": {echo_count + 1},
+  "author_id": KEEP THE ID,
+  "target_id": {new_target_id}
+}
