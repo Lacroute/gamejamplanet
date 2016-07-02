@@ -20,5 +20,9 @@
   "Record": {
     "dataSource": "mydb",
     "public": true
+  },
+  "Pendingbox": {
+    "dataSource": "mydb",
+    "public": true
   }
 }
