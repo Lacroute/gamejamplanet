@@ -1,0 +1,32 @@
+{
+  "name": "Player",
+  "plural": "Players",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "hexid": {
+      "type": "string"
+    },
+    "message_sent": {
+      "type": "string",
+      "default": false
+    },
+    "message_count": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "author": {
+      "type": "hasOne",
+      "model": "Record",
+      "foreignKey": "author_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
