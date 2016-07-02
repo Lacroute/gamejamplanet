@@ -4,6 +4,16 @@ using System.Collections;
 public class PlanetAnimation : MonoBehaviour {
 	public int planetRotationSpeed;
 		
+	IEnumerator CreationStateCoroutine(){
+		GameObject.Find ("Anneau").GetComponent<Animator>().SetBool ("Anneau_Disappear",true);
+		yield return new WaitForSeconds (1);
+
+		yield return new WaitForSeconds (3);
+		GameObject.Find ("Planet_Name").GetComponent<Animator> ().enabled = true;
+		yield return new WaitForSeconds (1);
+		// Faire apparaitre le champs de texte
+	}
+
 	// Update is called once per frame
 	void Update () {
 		transform.Rotate (Vector3.forward * Time.deltaTime *  - planetRotationSpeed );
@@ -20,7 +30,7 @@ public class PlanetAnimation : MonoBehaviour {
 	/// </summary>
 	void GoToCreationState (){
 		GameObject.FindGameObjectWithTag("Title_Text").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
-		GameObject.Find ("Anneau").GetComponent<Animator>().SetBool ("Anneau_Disappear",true);
+		StartCoroutine ("CreationStateCoroutine");
 	}
 
 
