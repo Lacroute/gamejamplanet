@@ -5,7 +5,11 @@ module.exports = function(Player) {
   //
   //   next();
   // });
+  Player.afterCreate = function(next) {
+    console.log('Time to create pending box ?');
 
+    Player.app.models.Pendingbox.create({handle_id: this.id}, next);
+  }
 
   Player.afterRemote('*.__create__author', function(ctx, inst, next) {
     Player.findOne({where:{id:inst.author_id}}, function(err, res){
