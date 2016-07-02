@@ -6,9 +6,9 @@
   },
   "models": {
     "Player": {
-      "1": "{\"message_sent\":\"false\",\"message_count\":0,\"id\":1}",
-      "2": "{\"message_sent\":\"false\",\"message_count\":0,\"id\":2}",
-      "3": "{\"message_sent\":\"false\",\"message_count\":0,\"id\":3}"
+      "1": "{\"message_sent\":\"true\",\"message_count\":0,\"id\":1}",
+      "2": "{\"message_sent\":\"true\",\"message_count\":0,\"id\":2}",
+      "3": "{\"message_sent\":\"true\",\"message_count\":0,\"id\":3}"
     },
     "Record": {
       "1": "{\"status\":\"transit\",\"data\":\"Message from 1\",\"echo_count\":\"0\",\"author_id\":1,\"id\":1,\"target_id\":1}",
@@ -16,9 +16,9 @@
       "3": "{\"status\":\"transit\",\"data\":\"Message from 3\",\"echo_count\":\"0\",\"author_id\":3,\"id\":3,\"target_id\":1}"
     },
     "Pendingbox": {
-      "1": "{\"pendingboxId\":1,\"id\":1}",
-      "2": "{\"pendingboxId\":2,\"id\":2}",
-      "3": "{\"pendingboxId\":3,\"id\":3}"
+      "1": "{\"handle_id\":1,\"id\":1}",
+      "2": "{\"handle_id\":2,\"id\":2}",
+      "3": "{\"handle_id\":3,\"id\":3}"
     }
   }
 }

@@ -3,8 +3,7 @@ module.exports = function(app) {
 
   //create all models
   async.parallel({
-    players: async.apply(createPlayers),
-    pendingboxes: async.apply(createPendingboxes),
+    players: async.apply(createPlayers)
   }, function(err, results) {
     if (err) throw err;
     // cleanRecords(function(err){
@@ -24,20 +23,9 @@ module.exports = function(app) {
       var Player = app.models.Player;
 
       Player.create([
-        {"message_sent": false, "message_count": 0},
-        {"message_sent": false, "message_count": 0},
-        {"message_sent": false, "message_count": 0}
-      ], cb);
-  }
-
-
-  //create pendingboxes
-  function createPendingboxes(cb) {
-      var Pendingbox = app.models.Pendingbox;
-      Pendingbox.create([
-        {pendingboxId: 1},
-        {pendingboxId: 2},
-        {pendingboxId: 3},
+        {"message_sent": true, "message_count": 0},
+        {"message_sent": true, "message_count": 0},
+        {"message_sent": true, "message_count": 0}
       ], cb);
   }
 
