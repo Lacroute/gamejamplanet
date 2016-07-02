@@ -29,6 +29,26 @@ public class GameManager : MonoBehaviour {
 	public string test;
 
 
+	public void setGameState(gameState gs)
+	{
+		Debug.Log("OldState: " + current_game_state);
+		current_game_state = gs;
+
+		if (current_game_state == gameState.initializationGame) 
+		{
+			//anim?
+		}
+		else if (current_game_state == gameState.introRookie) 
+		{
+			//anim?
+		}
+		else if (current_game_state == gameState.gameStarted) 
+		{
+			//anim?
+		}
+		Debug.Log ("NewState: " + current_game_state);
+	}
+
 	public WWW getDataFromDB(string url)
 	{		
 		WWW www = new WWW(url);
@@ -54,17 +74,18 @@ public class GameManager : MonoBehaviour {
 	{
 		Player player;
 		//get data from db
-		WWW data = getDataFromDB("http//petitebite");
+		WWW data = getDataFromDB("http//idDujoueurPourRecupCesInfos");
+		data = null;
 
 		//si le player est dans la base
 		if (data == null) 
 		{
-			current_game_state = gameState.introRookie;
+			setGameState(gameState.introRookie);
 			player = generateNewPlayer();
+			setGameState(gameState.gameStarted);
 		} 
 		else 
-		{
-			current_game_state = gameState.gameStarted;
+		{			
 			//test en attendant de vraiment get des choses 
 			//string dt = JsonUtility.ToJson(data);
 			int id = 1;
@@ -73,6 +94,8 @@ public class GameManager : MonoBehaviour {
 			Message current_message = null;
 
 			player = new Player(id, pending_messages, send_messages);
+
+			setGameState(gameState.gameStarted);
 		}
 			
 		return player;
@@ -90,22 +113,27 @@ public class GameManager : MonoBehaviour {
 		else 
 		{
 			//string dt = JsonUtility.ToJson(data);
-			Player player  = new Player(1, null, null);
+			Player player  = new Player(2, null, null);
 			return player;
 		}
+	}
 
-
+	IEnumerator WaitFunction(float waitTime) {
+		yield return new WaitForSeconds(waitTime);
+		print("WaitFunction " + Time.time);
 	}
 
 
 	// Use this for initialization
 	void Start () {
 		//on lan	ce le jeu, state = initializationGame 
-		current_game_state = gameState.initializationGame;
+		setGameState(gameState.initializationGame);
 
 		//get id du player
 		this.current_player = playerConnection();
+		current_player.displayInfo();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {

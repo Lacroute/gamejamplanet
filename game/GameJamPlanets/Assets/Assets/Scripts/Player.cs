@@ -26,6 +26,11 @@ public class Player : MonoBehaviour {
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 
+	public void displayInfo()
+	{
+		Debug.Log ("Id: " + this.hexid + " / Pending messages: " + this.pending_messages + " / Send messages : " + this.send_messages);
+	}
+
 
 	// Use this for initialization
 	void Start () {
