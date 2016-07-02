@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour {
 		gameStarted,
 	}
 
-	private int fakeId;
+	public int fakeId;
 
-	private gameState current_game_state;
+	public gameState current_game_state;
 
-	private Player current_player;
+	public Player current_player;
 
 	//récupération dans la base json => class
 	string json_player_DB_model;
@@ -124,15 +124,18 @@ public class GameManager : MonoBehaviour {
 
 			player_DB_model = JsonUtility.FromJson<PlayerDBModel>(json_player_DB_model);
 
-			//get info restante : pending message
-			WWW www2 = getDataFromDB(request.FindPendingMessages);
-
+			Debug.Log (player_DB_model.message_sent);
 			if (player_DB_model.message_sent) 
 			{
-				//find message sent
+				//get message sent
 			}
 			else 
 				current_player = new Player(player_DB_model.id, null, null, player_DB_model.message_sent);
+
+
+			Debug.Log (current_player.displayInfo());
+			//get info restante : pending message
+			WWW www2 = getDataFromDB(request.FindPendingMessages);
 
 
 			setGameState(gameState.gameStarted);
@@ -156,10 +159,9 @@ public class GameManager : MonoBehaviour {
 		//il n'y a pas d'erreurs, le player est dans la base => on recupère ses informations
 		if (www.error == null)
 		{
-			Debug.Log("WWW pending messages Ok!: " + www.text);
+			//Debug.Log("WWW pending messages Ok!: " + www.text);
 
 			json_pending_message = www.text;
-			Debug.Log (json_pending_message);
 
 			//Traitement du json récupéré, on sépare chaque json du tableau 
 			json_pending_message = json_pending_message.Remove(0,1);
@@ -179,18 +181,19 @@ public class GameManager : MonoBehaviour {
 				Debug.Log (pendingMessages[i]);
 
 				pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel>(pendingMessages[i]);
-				list_pending_DB.Add (pending_DB_model);
+				//list_pending_DB.Add (pending_DB_model);
+
+				current_player.addPendingMessage(new Message(pending_DB_model.status, pending_DB_model.data, pending_DB_model.echo_count, pending_DB_model.id, pending_DB_model.author_id, pending_DB_model.target_id));
 			}
 		
-			foreach (var message in list_pending_DB) 
+			/*foreach (var messageDB in list_pending_DB) 
 			{
-				
 				Debug.Log (message.status + " " + message.data + " " + message.echo_count + " " + message.author_id + " " + message.target_id );
+			}*/
 
-			}
 
-			//Debug.Log (json_pending_message);
-			//Debug.Log (pending_DB_model.status + " " + pending_DB_model.data + " " + pending_DB_model.echo_count + " " + pending_DB_model.author_id + " " + pending_DB_model.target_id );
+
+
 
 			//get info restante : pending message
 
@@ -260,6 +263,8 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
+		//current_player = new Player();
 		fakeId = 1;
 
 		//instanciation json et class modele pour la database
