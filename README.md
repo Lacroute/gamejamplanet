@@ -13,7 +13,6 @@ node .
 
 ## Créer un Player
 POST /Players {"hexid": "hexadecimal_color_code"}
-POST /Players{id_player}/handlerecord
 
 
 //////////////////////////////
@@ -38,4 +37,4 @@ Gestion des records reçus
 GET /Pendingboxes/{id_player}/target
 
 ## Modifier la target d'un Record
-PUT /Pendingboxes/{id_player}/target/{id_record} {"status": "sent", "target_id": {new_id}}
+POST /Record/{id_record}/updateTarget {"target_id": {new_target_id}}
