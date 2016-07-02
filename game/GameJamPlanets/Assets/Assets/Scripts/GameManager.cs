@@ -278,7 +278,7 @@ public class GameManager : MonoBehaviour {
 		//get info du player ou créé un player s'il n existe pas 
 		playerConnection();
 
-		//current_player.writeMessage();
+		current_player.writeMessage();
 	}
 
 	

@@ -3,16 +3,19 @@ using System.Collections;
 
 public class PlanetAnimation : MonoBehaviour {
 	public int planetRotationSpeed;
+	public GameObject Planet_Target;
 		
 	IEnumerator CreationStateCoroutine(){
 		GameObject.Find ("Anneau").GetComponent<Animator>().SetBool ("Anneau_Disappear",true);
 		yield return new WaitForSeconds (1);
-
+		GameObject.Find ("Planet_Name").GetComponent<Animator> ().enabled = true;
 		yield return new WaitForSeconds (3);
 		GameObject.Find ("Planet_Name").GetComponent<Animator> ().enabled = true;
 		yield return new WaitForSeconds (1);
 		// Faire apparaitre le champs de texte
 	}
+
+
 
 	// Update is called once per frame
 	void Update () {
