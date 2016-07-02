@@ -12,5 +12,13 @@
       "../common/mixins",
       "./mixins"
     ]
+  },
+  "Player": {
+    "dataSource": "mydb",
+    "public": true
+  },
+  "Record": {
+    "dataSource": "mydb",
+    "public": true
   }
 }

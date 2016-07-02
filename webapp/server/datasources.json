@@ -1,0 +1,8 @@
+{
+  "mydb": {
+    "name": "mydb",
+    "localStorage": "mydb_key",
+    "file": "./db.dat",
+    "connector": "memory"
+  }
+}

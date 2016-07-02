@@ -1,0 +1,29 @@
+{
+  "name": "Record",
+  "plural": "Records",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "transit"
+    },
+    "data": {
+      "type": "string",
+      "required": true
+    },
+    "echo_count": {
+      "type": "number",
+      "required": true,
+      "default": "0"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
