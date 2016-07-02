@@ -16,4 +16,5 @@
 .strong-pm
 webapp/coverage
 webapp/node_modules
+webapp/db.json
 npm-debug.log
