@@ -7,10 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
-    "status": {
-      "type": "string",
+    "shared": {
+      "type": "boolean",
       "required": true,
-      "default": "transit"
+      "default": false
     },
     "data": {
       "type": "string",
