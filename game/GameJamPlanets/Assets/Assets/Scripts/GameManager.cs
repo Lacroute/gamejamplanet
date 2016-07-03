@@ -344,16 +344,16 @@ public class GameManager : MonoBehaviour {
 				StartCoroutine ("CreationStateCoroutine");
 			}
 
-			introButton.onClick.AddListener(test);
-
-				
+			introButton.onClick.AddListener (test);
 	}
 
 	
 }
 
+
 	void test(){
 		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("clickButton");
 	}
+
 
 }

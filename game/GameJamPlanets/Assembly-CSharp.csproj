@@ -140,6 +140,7 @@
      <Compile Include="Assets\Assets\Francis\Standard Assets\Utility\WaypointCircuit.cs" />
      <Compile Include="Assets\Assets\Francis\Standard Assets\Utility\WaypointProgressTracker.cs" />
      <Compile Include="Assets\Assets\Scripts\ArriveeMessage.cs" />
+     <Compile Include="Assets\Assets\Scripts\DepartMessage.cs" />
      <Compile Include="Assets\Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Assets\Scripts\Message.cs" />
      <Compile Include="Assets\Assets\Scripts\Planet.cs" />
