@@ -4,16 +4,6 @@ using System.Collections;
 public class PlanetAnimation : MonoBehaviour {
 	public int planetRotationSpeed;
 	public GameObject Planet_Target;
-		
-	IEnumerator CreationStateCoroutine(){
-		GameObject.Find ("Anneau").GetComponent<Animator>().SetBool ("Anneau_Disappear",true);
-		yield return new WaitForSeconds (1);
-		GameObject.Find ("Planet_Name").GetComponent<Animator> ().enabled = true;
-		yield return new WaitForSeconds (3);
-		GameObject.Find ("Planet_Name").GetComponent<Animator> ().enabled = true;
-		yield return new WaitForSeconds (1);
-		// Faire apparaitre le champs de texte
-	}
 
 
 
@@ -21,19 +11,7 @@ public class PlanetAnimation : MonoBehaviour {
 	void Update () {
 		transform.Rotate (Vector3.forward * Time.deltaTime *  - planetRotationSpeed );
 
-		if(Input.GetMouseButtonDown(0)){
-			GoToCreationState ();	
-		}
-	}
 
-
-	// On passe à l'état après le splash : la création de la planète
-	/// <summary>
-	/// Apparition du nom de la planète et du champs pour taper le texte
-	/// </summary>
-	void GoToCreationState (){
-		GameObject.FindGameObjectWithTag("Title_Text").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
-		StartCoroutine ("CreationStateCoroutine");
 	}
 
 

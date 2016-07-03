@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
 
 	//UI
 	public InputField inputfield;
+	public Button introButton;
 
 	public enum request
 	{
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour {
 
 	public enum gameState
 	{
+		splashScreen,
 		initializationGame,
 		introRookie,
 		gameStarted,
@@ -78,7 +80,12 @@ public class GameManager : MonoBehaviour {
 	{
 		current_game_state = gs;
 
-		if (current_game_state == gameState.initializationGame) 
+		if (current_game_state == gameState.splashScreen) 
+		{
+			
+		}
+
+		else if (current_game_state == gameState.initializationGame) 
 		{
 			//anim?
 		}
@@ -134,6 +141,11 @@ public class GameManager : MonoBehaviour {
 
 //##################### Coroutine ########################
 
+	IEnumerator CreationStateCoroutine(){
+		yield return new WaitForSeconds (1);
+		Debug.Log ("coroutine");
+	}
+
 	IEnumerator WaitForPost(WWW www)
 	{
 		yield return www;
@@ -181,9 +193,9 @@ public class GameManager : MonoBehaviour {
 		{
 			Debug.Log("WWW Error find player: "+ www.error);
 
-			setGameState(gameState.introRookie);
+			//setGameState(gameState.introRookie);
 			//player = generateNewPlayer();
-			setGameState(gameState.gameStarted);
+			//setGameState(gameState.gameStarted);
 		} 
 	}
 
@@ -225,9 +237,9 @@ public class GameManager : MonoBehaviour {
 				}	
 			}
 			Debug.Log ("All player data loaded");
-			setGameState(gameState.gameStarted);
 
-			current_player.writeMessage();
+
+			//current_player.writeMessage();
 		} 
 		else 
 		{
@@ -300,6 +312,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//introButton = GameObject.Find ("Button_Intro").GetComponent<Button> ();
 
 		fakeId = 1;
 
@@ -314,20 +327,31 @@ public class GameManager : MonoBehaviour {
 		inputfield = GameObject.Find ("Canvas").transform.GetChild(0).transform.GetChild(0).GetComponent<InputField>();
 
 		//on lance le jeu, state = initializationGame 
-		setGameState(gameState.initializationGame);
+		setGameState(gameState.splashScreen);
 
 		//get info du player ou créé un player s'il n existe pas 
 		WWW www = getDataFromDB(request.FindExistingPlayer);
 
+	}
 
-		current_player.writeMessage();
+	void Update (){
+		if(current_game_state == gameState.splashScreen){
 
+			if(Input.GetMouseButtonDown(0)){
+				GameObject.Find("Game_Title").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
+				StartCoroutine ("CreationStateCoroutine");
+
+			}
+
+
+				
 	}
 
 	
-	// Update is called once per frame
-	void Update () {
-		
-		
+}
+
+	void test(){
+		Debug.Log ("test");
 	}
+
 }
