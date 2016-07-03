@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
 	{
 		FindExistingPlayer,
 		FindPendingMessages,
+		PostMessage,
 	}
 
 	public enum gameState
@@ -92,6 +93,25 @@ public class GameManager : MonoBehaviour {
 		Debug.Log ("NewState: " + current_game_state);
 	}
 
+
+
+
+//################  access to DB #################
+
+	public WWW PostDataToDB(string message)
+	{
+		string url = createPostMessageURL(fakeId);
+
+
+		WWWForm form = new WWWForm();
+		form.AddField("data", message);
+		WWW www = new WWW(url, form);
+
+		StartCoroutine(WaitForPost(www));
+
+		return www;
+	}
+
 	public WWW getDataFromDB(request r)
 	{	
 		string url;
@@ -111,6 +131,24 @@ public class GameManager : MonoBehaviour {
 		return www;
 	}
 
+
+//##################### Coroutine ########################
+
+	IEnumerator WaitForPost(WWW www)
+	{
+		yield return www;
+
+			// check for errors
+			if (www.error == null)
+			{
+				Debug.Log("WWW post message Ok!: " + www.data);
+			} 
+			else 
+			{
+				Debug.Log("WWW post message Error: "+ www.error);
+			}    
+	}  
+		
 	IEnumerator FindExistingPlayer(WWW www)
 	{
 		yield return www;
@@ -124,21 +162,19 @@ public class GameManager : MonoBehaviour {
 
 			player_DB_model = JsonUtility.FromJson<PlayerDBModel>(json_player_DB_model);
 
-			Debug.Log (player_DB_model.message_sent);
+			current_player = new Player(player_DB_model.id, player_DB_model.message_sent);
+
 			if (player_DB_model.message_sent) 
 			{
-				//get message sent
+				//get message in transit
 			}
-			else 
-				current_player = new Player(player_DB_model.id, null, null, player_DB_model.message_sent);
 
-
-			Debug.Log (current_player.displayInfo());
-			//get info restante : pending message
+		
+			//get next info : pending message
 			WWW www2 = getDataFromDB(request.FindPendingMessages);
 
 
-			setGameState(gameState.gameStarted);
+			//setGameState(gameState.gameStarted);
 		} 
 		//s 'il y a une erreur, pas le player en question ds la abse => on en créé un
 		else 
@@ -148,7 +184,7 @@ public class GameManager : MonoBehaviour {
 			setGameState(gameState.introRookie);
 			//player = generateNewPlayer();
 			setGameState(gameState.gameStarted);
-		}    
+		} 
 	}
 
 	IEnumerator FindPendingMessages(WWW www)
@@ -159,65 +195,50 @@ public class GameManager : MonoBehaviour {
 		//il n'y a pas d'erreurs, le player est dans la base => on recupère ses informations
 		if (www.error == null)
 		{
-			//Debug.Log("WWW pending messages Ok!: " + www.text);
+			Debug.Log("WWW pending messages Ok!: " + www.text);
 
 			json_pending_message = www.text;
 
-			//Traitement du json récupéré, on sépare chaque json du tableau 
-			json_pending_message = json_pending_message.Remove(0,1);
-			json_pending_message = json_pending_message.Remove(json_pending_message.Length-1,1);
-
-			string[] pendingMessages = json_pending_message.Split(new string[] { "},{" }, System.StringSplitOptions.None);
-
-			for(int i = 0; i < pendingMessages.Length; i++) 
+			if (json_pending_message.Length > 4) 
 			{
-				if(i == 0)
-					pendingMessages[i] = pendingMessages[i] + "}";
-				else if(i == pendingMessages.Length-1)
-					pendingMessages[i] = "{" + pendingMessages[i];
-				else
-					pendingMessages[i] = "{" + pendingMessages[i] + "}";
+				//Traitement du json récupéré, on sépare chaque json du tableau 
+				json_pending_message = json_pending_message.Remove (0, 1);
+				json_pending_message = json_pending_message.Remove (json_pending_message.Length - 1, 1);
 
-				Debug.Log (pendingMessages[i]);
+				string[] pendingMessages = json_pending_message.Split (new string[] { "},{" }, System.StringSplitOptions.None);
 
-				pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel>(pendingMessages[i]);
-				//list_pending_DB.Add (pending_DB_model);
+				for (int i = 0; i < pendingMessages.Length; i++) {
 
-				current_player.addPendingMessage(new Message(pending_DB_model.status, pending_DB_model.data, pending_DB_model.echo_count, pending_DB_model.id, pending_DB_model.author_id, pending_DB_model.target_id));
+					if (pendingMessages.Length != 1) 
+					{
+						if (i == 0)
+							pendingMessages [i] = pendingMessages [i] + "}";
+						else if (i == pendingMessages.Length - 1)
+							pendingMessages [i] = "{" + pendingMessages [i];
+						else
+							pendingMessages [i] = "{" + pendingMessages [i] + "}";
+					}
+
+					pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel> (pendingMessages [i]);
+					Message m = new Message (pending_DB_model);
+					current_player.addPendingMessage (m);
+				}	
 			}
-		
-			/*foreach (var messageDB in list_pending_DB) 
-			{
-				Debug.Log (message.status + " " + message.data + " " + message.echo_count + " " + message.author_id + " " + message.target_id );
-			}*/
+			Debug.Log ("All player data loaded");
+			setGameState(gameState.gameStarted);
 
-
-
-
-
-			//get info restante : pending message
-
-
-			//current_player = new Player(id, pending_messages, send_messages, false);
-
-			//setGameState(gameState.gameStarted);
+			current_player.writeMessage();
 		} 
 		else 
 		{
 			Debug.Log("WWW Error pendings messages: "+ www.error);
-
-			setGameState(gameState.introRookie);
-			//player = generateNewPlayer();
-			setGameState(gameState.gameStarted);
-		}    
+		}  
 	}
 
-	public void playerConnection()
-	{
-		//le player est il deja dans la base?
-		WWW www = getDataFromDB(request.FindExistingPlayer);
-	}
 
+
+//#################  Utils ##########################
+		
 	/*public Player generateNewPlayer()
 	{
 		//post sur la base pour créer un nouveau joueur avec un id;
@@ -242,6 +263,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 
+		
+
+//############# Generation urls get/post database #########################
+
 	//generation de l'url pour savoir si le player est deja dans la base
 	public string createFindPlayerURL(int playerId)
 	{
@@ -259,12 +284,23 @@ public class GameManager : MonoBehaviour {
 		return url_pendings;
 	}
 
+	public string createPostMessageURL(int playerId)
+	{	
+		string url = "http://0.0.0.0:3000/api/Players/" + playerId + "/author";
+		return url;
+	}
+
+
+
+
+
+
+
+//####################### Methode native unity ###########################
 
 	// Use this for initialization
 	void Start () {
 
-
-		//current_player = new Player();
 		fakeId = 1;
 
 		//instanciation json et class modele pour la database
@@ -281,9 +317,11 @@ public class GameManager : MonoBehaviour {
 		setGameState(gameState.initializationGame);
 
 		//get info du player ou créé un player s'il n existe pas 
-		playerConnection();
+		WWW www = getDataFromDB(request.FindExistingPlayer);
+
 
 		current_player.writeMessage();
+
 	}
 
 	

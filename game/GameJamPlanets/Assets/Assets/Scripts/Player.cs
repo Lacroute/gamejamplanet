@@ -14,20 +14,20 @@ public class Player{
 
 	public int hexid; //ok
 	public List<Message> pending_messages;//ok
-	//private List<Message> send_messages;
 	public Message current_message; //ok
 	public bool current_message_bool; //ok
 	public GameManager gameManagerScript; //ok
 
 
-	public Player(int id, List<Message> pm, Message cm, bool b)
+	public Player(int id, bool b)
 	{
 		this.hexid = id;
-		this.pending_messages = pm;
-		this.current_message = cm;
+		this.pending_messages = new List<Message>();
+		this.current_message = null;
 		current_message_bool = b;
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
+
 
 	public void setPendingsMessages(List<Message> list)
 	{
@@ -42,10 +42,12 @@ public class Player{
 	
 	public void displayInfo()
 	{
-		Debug.Log ("Id: " + this.hexid + " / Pending messages: " + this.pending_messages + " / Current message : " + this.current_message);
-		foreach (var message in pending_messages) 
+		if (this.pending_messages != null) 
 		{
-			message.displayMessageInfo ();
+			Debug.Log ("Id: " + this.hexid + " currentMessageBool: " + this.current_message_bool + " nbPendingMessages: " + this.pending_messages.Count);
+			foreach (var message in pending_messages) {
+				message.displayMessageInfo ();
+			}
 		}
 	}
 
@@ -53,12 +55,14 @@ public class Player{
 	{
 		InputField.SubmitEvent se = new InputField.SubmitEvent();
 		gameManagerScript.inputfield.onEndEdit.AddListener(postMessage);
+
+
 	}
 
 	private void postMessage(string text)
 	{
 		//j'envoie le message à la db 
-		Debug.Log(text);
+		gameManagerScript.PostDataToDB(text);
 	}
 
 
