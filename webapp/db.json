@@ -1,8 +1,27 @@
 {
   "ids": {
     "Player": 4,
+<<<<<<< HEAD
     "Record": 10,
     "Pendingbox": 28
+=======
+<<<<<<< HEAD
+    "Record": 4
+  },
+  "models": {
+    "Player": {
+      "1": "{\"hexid\":\"fff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":1}",
+      "2": "{\"hexid\":\"ffff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":2}",
+      "3": "{\"hexid\":\"fffff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":3}"
+    },
+    "Record": {
+      "1": "{\"shared\":false,\"data\":\"TEST 1\",\"echo_count\":0,\"author_id\":1,\"id\":1,\"target_id\":null}",
+      "2": "{\"shared\":false,\"data\":\"TEST 2\",\"echo_count\":0,\"author_id\":2,\"id\":2,\"target_id\":null}",
+      "3": "{\"shared\":false,\"data\":\"TEST 3\",\"echo_count\":1,\"author_id\":3,\"id\":3,\"target_id\":null}"
+=======
+    "Record": 9,
+    "Pendingbox": 25
+>>>>>>> 619befca5742b1bf4532e39f17059ad2f67df0d3
   },
   "models": {
     "Player": {
@@ -35,10 +54,15 @@
       "21": "{\"handle_id\":6,\"id\":21}",
       "22": "{\"handle_id\":4,\"id\":22}",
       "23": "{\"handle_id\":5,\"id\":23}",
+<<<<<<< HEAD
       "24": "{\"handle_id\":6,\"id\":24}",
       "25": "{\"handle_id\":4,\"id\":25}",
       "26": "{\"handle_id\":5,\"id\":26}",
       "27": "{\"handle_id\":6,\"id\":27}"
+=======
+      "24": "{\"handle_id\":6,\"id\":24}"
+>>>>>>> 03916a0d1bda7db14d4b181c93e6458261cd26de
+>>>>>>> 619befca5742b1bf4532e39f17059ad2f67df0d3
     }
   }
 }

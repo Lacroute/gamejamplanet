@@ -25,11 +25,6 @@
       "type": "hasOne",
       "model": "Record",
       "foreignKey": "author_id"
-    },
-    "handlerecord": {
-      "type": "hasOne",
-      "model": "Pendingbox",
-      "foreignKey": "handle_id"
     }
   },
   "acls": [],

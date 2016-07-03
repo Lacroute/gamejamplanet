@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
 		}
 		else if (current_game_state == gameState.writeMessage) 
 		{
-
+			current_player.writeMessage ();
 		}
 
 		else if (current_game_state == gameState.initializationGame) 
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 		}
 		else if (current_game_state == gameState.gameStarted) 
 		{
-			current_player.writeMessage ();
+			
 		}
 		Debug.Log ("NewState: " + current_game_state);
 	}
