@@ -353,7 +353,7 @@ public class GameManager : MonoBehaviour {
 }
 
 	void test(){
-		Debug.Log ("test");
+		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("clickButton");
 	}
 
 }
