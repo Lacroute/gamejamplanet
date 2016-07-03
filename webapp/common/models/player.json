@@ -11,7 +11,7 @@
       "type": "string"
     },
     "message_sent": {
-      "type": "string",
+      "type": "boolean",
       "default": false
     },
     "message_count": {
