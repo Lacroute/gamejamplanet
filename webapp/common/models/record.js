@@ -1,22 +1,32 @@
 module.exports = function(Record) {
 
-  Record.updateTarget = function(id, new_target_id, cb) {
-    Record.findOne({where:{id:id}}, function(err, rec){
-      rec.target_id = new_target_id;
-      rec.echo_count += 1;
-      rec.save();
-    });
+  // send target_id null to go to transit
+  Record.share = function(id, shared, cb) {
+    Record.findOne(
+      {
+        where: { id: id }
+      },
+      function(err, rec){
+        if(err) return cb(err);
 
-    cb();
+        if(shared) {
+          rec.echo_count += 1;
+        }
+        rec.shared = false;
+        rec.save();
+      }
+    );
   };
+
   Record.remoteMethod(
-    'updateTarget',
+    'share',
     {
       accepts: [
         {arg: 'id', type: 'number', required: true},
-        {arg: 'new_target_id', type: 'number'}],
+        {arg: 'shared', type: 'boolean'}
+      ],
       returns: {},
-      http: {path:'/:id/updateTarget', verb: 'post'}
+      http: {path:'/:id/share', verb: 'post'}
     }
   );
 

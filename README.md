@@ -19,22 +19,22 @@ POST /Players {"hexid": "hexadecimal_color_code"}
 Gestion du records d'un Player
 //////////////////////////////
 
-## Créer le record d'un Player
+## Créer le record du Player
 POST /Players/{id_player}/author {"data": "my records to the universe"}
 
-## Récupérer le records d'un Player
+## Récupérer le record du Player
 GET /Players/{id_player}/author
 
-## Détruire le records d'un Player
-DELETE /Players/{id_player}/author
+## Détruire le record du Player
+DELETE /Records/{id_record}
 
 
 /////////////////////////
 Gestion des records reçus
 /////////////////////////
 
-## Récupérer les pendings d'un Player
-GET /Pendingboxes/{id_player}/target
+## Récupérer aléatoirement un record de la pool
+GET /Player/{id_player}/listenSpace
 
-## Modifier la target d'un Record
-POST /Record/{id_record}/updateTarget {"target_id": {new_target_id}}
+## Mettre à jour un record
+POST /Record/{id_record}/share {"shared": {true | false}}
