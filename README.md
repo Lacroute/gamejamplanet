@@ -22,11 +22,8 @@ Gestion du records d'un Player
 ## Créer le record du Player
 POST /Players/{id_player}/author {"data": "my records to the universe"}
 
-## Récupérer le record du Player
-GET /Players/{id_player}/author
-
-## Détruire le record du Player
-DELETE /Records/{id_record}
+## Récupérer le nombre de share d'un record
+GET /Records/{id_record}/sharing/count
 
 
 /////////////////////////
@@ -36,5 +33,5 @@ Gestion des records reçus
 ## Récupérer aléatoirement un record de la pool
 GET /Player/{id_player}/listenSpace
 
-## Mettre à jour un record
-POST /Record/{id_record}/share {"shared": {true | false}}
+## Héberger un record
+PUT /Record/{id_current_record}/sharing/{id_player} { "sharing_id": {id_new_record}}
