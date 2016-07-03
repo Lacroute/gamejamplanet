@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour {
 	//UI
 	public InputField inputfield;
 	public Button introButton;
+	public Button sondeButton;
+	public Button acceptButton;
+	public Button declineButton;
 	public bool boolButton;
 
 	public GameObject myIdeaCapsule;
@@ -62,7 +65,13 @@ public class GameManager : MonoBehaviour {
 	{
 		splashScreen,
 		writeMessage,
-		freeMessage, 
+		freeMessage,
+		waitingSonde,
+		sonding,
+		acceptIdea,
+		declineIdea,
+
+
 		initializationGame,
 		introRookie,
 		gameStarted,
@@ -99,10 +108,20 @@ public class GameManager : MonoBehaviour {
 		{
 			myIdeaCapsule.SetActive (true);
 			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("freeMyCapsule");
+			setGameState (gameState.waitingSonde);
 		}
-		else if (current_game_state == gameState.initializationGame) 
+		else if (current_game_state == gameState.waitingSonde) 
 		{
-			//anim?
+			
+		}
+		else if (current_game_state == gameState.sonding) 
+		{
+			ideaCapsuleOther.SetActive (true);
+			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("sonding");
+		}
+		else if (current_game_state == gameState.declineIdea) 
+		{
+			
 		}
 		else if (current_game_state == gameState.introRookie) 
 		{
@@ -286,18 +305,34 @@ public class GameManager : MonoBehaviour {
 		print("WaitFunction " + Time.time);
 	}
 
-	void startGameButton(){
-		//si on a deja un message cosmique
-		//if (current_player.current_message_bool) {
-		if (false) {
+	public void startGameButton(){
 
-		} 
-		//sinon on en créé un
-		else {
 			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("clickButton");
 			setGameState (gameState.writeMessage);
-		}
+		
 	}
+
+	public void sondeButtonAction()
+	{
+		Debug.Log ("click sonde");
+		setGameState (gameState.sonding);
+	}
+
+	public void acceptButtonAction()
+	{
+		Debug.Log ("accept");
+		//setGameState (gameState.sonding);
+	}
+
+	public void declineButtonAction()
+	{
+		Debug.Log ("decline");
+		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("declineIdeaWhenNoIdea");
+		setGameState (gameState.waitingSonde);
+	}
+
+
+
 
 
 		
@@ -357,24 +392,15 @@ public class GameManager : MonoBehaviour {
 		inputfield = GameObject.Find ("Game_Title").transform.GetChild(0).transform.GetChild(0).GetComponent<InputField>();
 		Debug.Log (inputfield);
 
-
-
 		//on lance le jeu, state = initializationGame 
 		setGameState(gameState.splashScreen);
 
-
-
 		//get info du player ou créé un player s'il n existe pas 
 		WWW www = getDataFromDB(request.FindExistingPlayer);
-
-
-
 	}
 
 	void Update (){
 		if(current_game_state == gameState.splashScreen){
-
-
 
 			if(Input.GetMouseButtonDown(0)){
 				GameObject.Find("Game_Title").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
@@ -383,6 +409,23 @@ public class GameManager : MonoBehaviour {
 			introButton.onClick.RemoveAllListeners();
 			introButton.onClick.AddListener (startGameButton);
 		}
+
+		if(current_game_state == gameState.waitingSonde){
+
+			sondeButton.onClick.RemoveAllListeners();
+			sondeButton.onClick.AddListener (sondeButtonAction);
+		}
+
+
+		if(current_game_state == gameState.sonding){
+
+			acceptButton.onClick.RemoveAllListeners();
+			acceptButton.onClick.AddListener (acceptButtonAction);
+
+			declineButton.onClick.RemoveAllListeners();
+			declineButton.onClick.AddListener (declineButtonAction);
+		}
+
 	}
 
 }
