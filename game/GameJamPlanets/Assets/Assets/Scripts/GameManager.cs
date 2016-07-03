@@ -329,6 +329,8 @@ public class GameManager : MonoBehaviour {
 		//on lance le jeu, state = initializationGame 
 		setGameState(gameState.splashScreen);
 
+
+
 		//get info du player ou créé un player s'il n existe pas 
 		WWW www = getDataFromDB(request.FindExistingPlayer);
 
