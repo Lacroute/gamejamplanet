@@ -344,16 +344,9 @@ public class GameManager : MonoBehaviour {
 				StartCoroutine ("CreationStateCoroutine");
 			}
 
-			introButton.onClick.AddListener(test);
-
-				
 	}
 
 	
 }
-
-	void test(){
-		Debug.Log ("test");
-	}
-
+		
 }
