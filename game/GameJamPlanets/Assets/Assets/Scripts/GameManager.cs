@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour {
 		sonding,
 		acceptIdea,
 		declineIdea,
+		ideaHost,
 
 
 		initializationGame,
@@ -116,17 +117,28 @@ public class GameManager : MonoBehaviour {
 		}
 		else if (current_game_state == gameState.sonding) 
 		{
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<ArriveeMessage> ().enabled = true;
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<DepartMessage> ().enabled = false;
+			ideaCapsuleOther.transform.position = new Vector3 (0, 0, 0);
 			ideaCapsuleOther.SetActive (true);
 			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("sonding");
 		}
 		else if (current_game_state == gameState.declineIdea) 
 		{
-			
+			Debug.Log (ideaCapsuleOther.transform.GetChild(0).GetComponent<ArriveeMessage> ());
+			ideaCapsuleOther.transform.GetChild (0).GetComponent<ArriveeMessage> ().messageHasReachedTarget = false;
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<ArriveeMessage> ().enabled = false;
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<DepartMessage> ().enabled = true;
+			setGameState (gameState.waitingSonde);
 		}
-		else if (current_game_state == gameState.introRookie) 
+		else if (current_game_state == gameState.acceptIdea) 
 		{
-			//anim?
+			ideaCapsuleOther.transform.GetChild (0).GetComponent<ArriveeMessage> ().messageHasReachedTarget = false;
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<ArriveeMessage> ().enabled = false;
+			ideaCapsuleOther.transform.GetChild(0).GetComponent<DepartMessage> ().enabled = true;
+			setGameState (gameState.ideaHost);
 		}
+
 		else if (current_game_state == gameState.gameStarted) 
 		{
 			
@@ -321,14 +333,15 @@ public class GameManager : MonoBehaviour {
 	public void acceptButtonAction()
 	{
 		Debug.Log ("accept");
-		//setGameState (gameState.sonding);
+		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("acceptIdeaWhenNoIdea");
+		setGameState (gameState.acceptIdea);
 	}
 
 	public void declineButtonAction()
 	{
 		Debug.Log ("decline");
 		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("declineIdeaWhenNoIdea");
-		setGameState (gameState.waitingSonde);
+		setGameState (gameState.declineIdea);
 	}
 
 
@@ -419,11 +432,15 @@ public class GameManager : MonoBehaviour {
 
 		if(current_game_state == gameState.sonding){
 
-			acceptButton.onClick.RemoveAllListeners();
-			acceptButton.onClick.AddListener (acceptButtonAction);
+			if (ideaCapsuleOther.transform.GetChild (0).GetComponent<ArriveeMessage> ().messageHasReachedTarget) 
+			{
+				acceptButton.onClick.RemoveAllListeners();
+				acceptButton.onClick.AddListener (acceptButtonAction);
+			
+				declineButton.onClick.RemoveAllListeners();
+				declineButton.onClick.AddListener (declineButtonAction);
+			}
 
-			declineButton.onClick.RemoveAllListeners();
-			declineButton.onClick.AddListener (declineButtonAction);
 		}
 
 	}
