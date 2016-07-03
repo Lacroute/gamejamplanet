@@ -7,23 +7,22 @@
     "validateUpsert": true
   },
   "properties": {
-    "shared": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
     "data": {
       "type": "string",
       "required": true
     },
-    "echo_count": {
+    "history": {
       "type": "number",
-      "required": true,
-      "default": "0"
+      "default": 0
     }
   },
   "validations": [],
   "relations": {
+    "sharing": {
+      "type": "hasMany",
+      "model": "Player",
+      "foreignKey": "sharing_id"
+    }
   },
   "acls": [],
   "methods": {}

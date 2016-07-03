@@ -1,44 +1,65 @@
 module.exports = function(Record) {
 
-  // send target_id null to go to transit
-  Record.share = function(id, shared, cb) {
-    Record.findOne(
-      {
-        where: { id: id }
-      },
-      function(err, rec){
-        if(err) return cb(err);
+  const HISTORY_LUCK = 3;
 
-        if(shared) {
-          rec.echo_count += 1;
+
+  Record.afterRemote('*.__updateById__sharing',
+    function(ctx, player_affected, next) {
+
+      // Check if the affected record still alive
+      Record.app.models.Player.find(
+        {
+          where: {sharing_id: ctx.req.params.id}
+        },
+        function(err, players){
+          if(err) next(err);
+
+          // Destroy Record if nobody share it
+          if(players.length == 0){
+            Record.findById(
+              ctx.req.params.id,
+              function(err, r){
+                if(err) return(err);
+
+                r.history += 1;
+
+                if(r.history > HISTORY_LUCK){
+                  Record.destroyById(ctx.req.params.id)
+                }else{
+                  r.save();
+                }
+              }
+            )
+          }
         }
-        rec.shared = false;
-        rec.save();
-      }
-    );
-  };
-
-  Record.remoteMethod(
-    'share',
-    {
-      accepts: [
-        {arg: 'id', type: 'number', required: true},
-        {arg: 'shared', type: 'boolean'}
-      ],
-      returns: {},
-      http: {path:'/:id/share', verb: 'post'}
+      )
+      next();
     }
   );
 
 
-  Record.observe('before delete', function(context, next) {
-    Record.app.models.Player.findOne(
-      { where: context.where }, function(err, player) {
-        player.message_sent = false;
-        player.save();
-    });
 
-    next();
+  // Update author status
+  Record.observe('before delete', function(context, next) {
+
+    Record.findById(
+      context.where.id,
+      function(err, r){
+        console.log('r', r);
+        Record.app.models.Player.findById(
+          r.author_id,
+          function(err, p) {
+
+            if(err) return(err);
+            // TODO NOTIFY PLAYER HE DIES
+            p.message_sent = false;
+            p.save();
+            console.log(context.Model.pluralModelName, context.where.id, 'DELETED');
+            next();
+          }
+        );
+      }
+    )
   });
 
 };

@@ -9,17 +9,20 @@ module.exports = function(Player) {
 
   // Link a player to his record.
   Player.afterRemote('*.__create__author', function(ctx, inst, next) {
-    Player.findOne({where:{id:inst.author_id}}, function(err, res){
-      res.message_count ++;
-      res.message_sent = true;
-      res.save();
-    });
+    Player.findById(
+      inst.author_id,
+      function(err, res){
+        res.message_count ++;
+        res.message_sent = true;
 
-    Player.app.models.Record.findOne(
-      {where:{id:inst.id}},function(err, res){
-      res.target_id = null;
-      res.save();
-    });
+        // First Record, init sharing with your id, otherwise continue to share the old one.
+        if(!res.sharing_id){
+          res.sharing_id = inst.id;
+        }
+
+        res.save();
+      }
+    );
 
     next();
   });
@@ -29,7 +32,7 @@ module.exports = function(Player) {
   Player.listenSpace = function(id, cb) {
     Player.app.models.Record.find(
       {
-        where:{author_id: {neq: id}}
+        where: { author_id: {neq: id} }
       },
       function(err, recs){
         if(err) return cb(err);

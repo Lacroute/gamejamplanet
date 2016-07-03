@@ -5,14 +5,14 @@
   },
   "models": {
     "Player": {
-      "1": "{\"hexid\":\"fff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":1}",
-      "2": "{\"hexid\":\"ffff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":2}",
-      "3": "{\"hexid\":\"fffff\",\"message_sent\":\"true\",\"message_count\":1,\"id\":3}"
+      "1": "{\"message_sent\":true,\"message_count\":0,\"id\":1,\"sharing_id\":2}",
+      "2": "{\"message_sent\":true,\"message_count\":0,\"id\":2,\"sharing_id\":2}",
+      "3": "{\"message_sent\":true,\"message_count\":0,\"id\":3,\"sharing_id\":3}"
     },
     "Record": {
-      "1": "{\"shared\":false,\"data\":\"TEST 1\",\"echo_count\":0,\"author_id\":1,\"id\":1,\"target_id\":null}",
-      "2": "{\"shared\":false,\"data\":\"TEST 2\",\"echo_count\":0,\"author_id\":2,\"id\":2,\"target_id\":null}",
-      "3": "{\"shared\":false,\"data\":\"TEST 3\",\"echo_count\":1,\"author_id\":3,\"id\":3,\"target_id\":null}"
+      "1": "{\"data\":\"SAVE P1\",\"history\":0,\"author_id\":1,\"id\":1}",
+      "2": "{\"data\":\"SAVE P2\",\"history\":0,\"author_id\":2,\"id\":2}",
+      "3": "{\"data\":\"SAVE P3\",\"history\":0,\"author_id\":3,\"id\":3}"
     }
   }
 }
