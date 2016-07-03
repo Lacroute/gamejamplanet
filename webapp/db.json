@@ -2,7 +2,7 @@
   "ids": {
     "Player": 4,
     "Record": 9,
-    "Pendingbox": 22
+    "Pendingbox": 25
   },
   "models": {
     "Player": {
@@ -10,9 +10,7 @@
       "2": "{\"message_sent\":\"false\",\"message_count\":1,\"id\":2}",
       "3": "{\"message_sent\":\"false\",\"message_count\":1,\"id\":3}"
     },
-    "Record": {
-      "8": "{\"status\":\"transit\",\"data\":\"je suis un chacal\",\"echo_count\":0,\"author_id\":1,\"id\":8,\"target_id\":1}"
-    },
+    "Record": {},
     "Pendingbox": {
       "1": "{\"handle_id\":1,\"id\":1}",
       "2": "{\"handle_id\":2,\"id\":2}",
@@ -34,7 +32,10 @@
       "18": "{\"handle_id\":6,\"id\":18}",
       "19": "{\"handle_id\":4,\"id\":19}",
       "20": "{\"handle_id\":5,\"id\":20}",
-      "21": "{\"handle_id\":6,\"id\":21}"
+      "21": "{\"handle_id\":6,\"id\":21}",
+      "22": "{\"handle_id\":4,\"id\":22}",
+      "23": "{\"handle_id\":5,\"id\":23}",
+      "24": "{\"handle_id\":6,\"id\":24}"
     }
   }
 }
