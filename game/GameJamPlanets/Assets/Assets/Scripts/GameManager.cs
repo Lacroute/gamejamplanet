@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour {
 	public Button introButton;
 	public bool boolButton;
 
-	public GameObject ideaCapsule;
+	public GameObject myIdeaCapsule;
+	public GameObject ideaCapsuleOther;
+
 
 	public enum request
 	{
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour {
 	{
 		splashScreen,
 		writeMessage,
+		freeMessage, 
 		initializationGame,
 		introRookie,
 		gameStarted,
@@ -92,7 +95,11 @@ public class GameManager : MonoBehaviour {
 		{
 			current_player.writeMessage ();
 		}
-
+		else if (current_game_state == gameState.freeMessage) 
+		{
+			myIdeaCapsule.SetActive (true);
+			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("freeMyCapsule");
+		}
 		else if (current_game_state == gameState.initializationGame) 
 		{
 			//anim?
@@ -331,8 +338,11 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		ideaCapsule = GameObject.Find ("MessageHolder");
-		ideaCapsule.SetActive(false);
+		ideaCapsuleOther = GameObject.Find ("MessageHolder");
+		ideaCapsuleOther.SetActive(false);
+
+		myIdeaCapsule = GameObject.Find ("MyRecordLaunch");
+		myIdeaCapsule.SetActive(false);
 
 		fakeId = 1;
 
@@ -368,7 +378,6 @@ public class GameManager : MonoBehaviour {
 
 			if(Input.GetMouseButtonDown(0)){
 				GameObject.Find("Game_Title").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
-				Debug.Log ("yooooooooo");
 			}
 
 			introButton.onClick.RemoveAllListeners();

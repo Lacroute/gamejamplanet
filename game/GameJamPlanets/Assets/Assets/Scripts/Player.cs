@@ -62,13 +62,15 @@ public class Player{
 		se.AddListener(postMessage);
 		gameManagerScript.inputfield.onEndEdit = se;
 
+
 		//GameObject idea = Instantiate ();
 	}
 
 	private void postMessage(string text)
 	{	//j'envoie le message à la db 
-		Debug.Log ("lololo");
 		gameManagerScript.PostDataToDB(text);
+		//on change d'état, le message est envoyé
+		gameManagerScript.setGameState (GameManager.gameState.freeMessage);
 	}
 
 
