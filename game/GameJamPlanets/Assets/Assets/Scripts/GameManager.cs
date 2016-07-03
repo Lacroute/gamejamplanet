@@ -312,7 +312,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//introButton = GameObject.Find ("Button_Intro").GetComponent<Button> ();
+		
 
 		fakeId = 1;
 
@@ -342,9 +342,9 @@ public class GameManager : MonoBehaviour {
 			if(Input.GetMouseButtonDown(0)){
 				GameObject.Find("Game_Title").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
 				StartCoroutine ("CreationStateCoroutine");
-
 			}
 
+			introButton.onClick.AddListener(test);
 
 				
 	}
