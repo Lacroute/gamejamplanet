@@ -33,10 +33,20 @@ public class Message{
 		this.author_id = aid;
 		this.target_id = tid;
 	}
+
+	public Message(PendingMessageDBModel pdm)
+	{
+		this.status = pdm.status;
+		this.data = pdm.data;
+		this.echo_count = pdm.echo_count;
+		this.id = pdm.id;
+		this.author_id = pdm.author_id;
+		this.target_id = pdm.target_id;
+	}
 		
 	public void displayMessageInfo()
 	{
-		Debug.Log ("status: " + this.status + " data: " + this.data + "echocount: " + this.echo_count + " id: " + this.id + "author: " + this.author_id + " target: " + this.target_id );
+		Debug.Log ("status: " + this.status + " data: " + this.data + " echocount: " + this.echo_count + " id: " + this.id + " author: " + this.author_id + " target: " + this.target_id );
 	}
 
 	public void setState(messageState new_state)
