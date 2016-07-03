@@ -53,15 +53,21 @@ public class Player{
 
 	public void writeMessage()
 	{
-		InputField.SubmitEvent se = new InputField.SubmitEvent();
-		gameManagerScript.inputfield.onEndEdit.AddListener(postMessage);
+		/*var input = gameObject.GetComponent<InputField>();
+		var se= new InputField.SubmitEvent();
+		se.AddListener(SubmitName);
+		input.onEndEdit = se;*/
 
+		var se = new InputField.SubmitEvent();
+		se.AddListener(postMessage);
+		gameManagerScript.inputfield.onEndEdit = se;
 
+		//GameObject idea = Instantiate ();
 	}
 
 	private void postMessage(string text)
-	{
-		//j'envoie le message à la db 
+	{	//j'envoie le message à la db 
+		Debug.Log ("lololo");
 		gameManagerScript.PostDataToDB(text);
 	}
 

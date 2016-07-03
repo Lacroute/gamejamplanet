@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour {
 	//UI
 	public InputField inputfield;
 	public Button introButton;
+	public bool boolButton;
+
+	public GameObject ideaCapsule;
 
 	public enum request
 	{
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour {
 	public enum gameState
 	{
 		splashScreen,
+		writeMessage,
 		initializationGame,
 		introRookie,
 		gameStarted,
@@ -84,6 +88,10 @@ public class GameManager : MonoBehaviour {
 		{
 			
 		}
+		else if (current_game_state == gameState.writeMessage) 
+		{
+
+		}
 
 		else if (current_game_state == gameState.initializationGame) 
 		{
@@ -95,7 +103,7 @@ public class GameManager : MonoBehaviour {
 		}
 		else if (current_game_state == gameState.gameStarted) 
 		{
-			//anim?
+			current_player.writeMessage ();
 		}
 		Debug.Log ("NewState: " + current_game_state);
 	}
@@ -143,7 +151,6 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator CreationStateCoroutine(){
 		yield return new WaitForSeconds (1);
-		Debug.Log ("coroutine");
 	}
 
 	IEnumerator WaitForPost(WWW www)
@@ -185,8 +192,6 @@ public class GameManager : MonoBehaviour {
 			//get next info : pending message
 			WWW www2 = getDataFromDB(request.FindPendingMessages);
 
-
-			//setGameState(gameState.gameStarted);
 		} 
 		//s 'il y a une erreur, pas le player en question ds la abse => on en créé un
 		else 
@@ -274,6 +279,19 @@ public class GameManager : MonoBehaviour {
 		print("WaitFunction " + Time.time);
 	}
 
+	void startGameButton(){
+		//si on a deja un message cosmique
+		//if (current_player.current_message_bool) {
+		if (false) {
+
+		} 
+		//sinon on en créé un
+		else {
+			GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("clickButton");
+			setGameState (gameState.writeMessage);
+		}
+	}
+
 
 		
 
@@ -312,7 +330,9 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+		ideaCapsule = GameObject.Find ("MessageHolder");
+		ideaCapsule.SetActive(false);
 
 		fakeId = 1;
 
@@ -324,7 +344,10 @@ public class GameManager : MonoBehaviour {
 		pending_DB_model = new PendingMessageDBModel ();
 		json_pending_message = JsonUtility.ToJson(pending_DB_model);
 
-		inputfield = GameObject.Find ("Canvas").transform.GetChild(0).transform.GetChild(0).GetComponent<InputField>();
+		inputfield = GameObject.Find ("Game_Title").transform.GetChild(0).transform.GetChild(0).GetComponent<InputField>();
+		Debug.Log (inputfield);
+
+
 
 		//on lance le jeu, state = initializationGame 
 		setGameState(gameState.splashScreen);
@@ -334,26 +357,23 @@ public class GameManager : MonoBehaviour {
 		//get info du player ou créé un player s'il n existe pas 
 		WWW www = getDataFromDB(request.FindExistingPlayer);
 
+
+
 	}
 
 	void Update (){
 		if(current_game_state == gameState.splashScreen){
 
+
+
 			if(Input.GetMouseButtonDown(0)){
 				GameObject.Find("Game_Title").GetComponent<Animator> ().SetBool ("Title_Disappear",true);
-				StartCoroutine ("CreationStateCoroutine");
+				Debug.Log ("yooooooooo");
 			}
 
-			introButton.onClick.AddListener (test);
+			introButton.onClick.RemoveAllListeners();
+			introButton.onClick.AddListener (startGameButton);
+		}
 	}
-
-	
-}
-
-
-	void test(){
-		GameObject.Find ("Game_Title").GetComponent<Animator> ().SetTrigger ("clickButton");
-	}
-
 
 }
