@@ -49,3 +49,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+./game/GameJamPlanets/Assets/Assets/Clemi/_samples
