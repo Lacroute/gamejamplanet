@@ -6,7 +6,7 @@
   },
   "models": {
     "Player": {
-      "1": "{\"message_sent\":true,\"message_count\":0,\"id\":1,\"sharing_id\":2}",
+      "1": "{\"hexid\":\"#c93b25\",\"message_sent\":true,\"message_count\":0,\"id\":1,\"sharing_id\":2}",
       "2": "{\"message_sent\":true,\"message_count\":0,\"id\":2,\"sharing_id\":2}",
       "3": "{\"message_sent\":true,\"message_count\":0,\"id\":3,\"sharing_id\":3}"
     },

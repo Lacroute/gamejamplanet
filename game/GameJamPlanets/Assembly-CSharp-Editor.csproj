@@ -68,12 +68,14 @@
      <Compile Include="Assets\Assets\SoundManagerPro\Editor\SoundManagerEditor.cs" />
      <Compile Include="Assets\Assets\SoundManagerPro\Editor\SoundManagerEditorTools.cs" />
      <Compile Include="Assets\Assets\SoundManagerPro\Editor\SoundPocketEditor.cs" />
+     <Compile Include="Assets\JSON\Editor\JSONChecker.cs" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\JSON\readme.txt" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />

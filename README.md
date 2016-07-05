@@ -31,7 +31,7 @@ Gestion des records reçus
 /////////////////////////
 
 ## Récupérer aléatoirement un record de la pool
-GET /Player/{id_player}/listenSpace
+GET /Player/{id_player}/listenToSpace
 
 ## Héberger un record
-PUT /Record/{id_current_record}/sharing/{id_player} { "sharing_id": {id_new_record}}
+POST /Record/{id_current_record}/sharedBy/{id_player} { "sharing_id": {id_new_record}}

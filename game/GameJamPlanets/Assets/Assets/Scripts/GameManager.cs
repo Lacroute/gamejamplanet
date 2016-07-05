@@ -3,19 +3,19 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerDBModel
-{
-	public bool message_sent;
-	public int message_count;
-	public int id;
-
-	public PlayerDBModel()
-	{
-		this.message_sent = false;
-		this.message_count = 0;
-		this.id = 0;
-	}
-}
+//public class PlayerDBModel
+//{
+//	public bool message_sent;
+//	public int message_count;
+//	public int id;
+//
+//	public PlayerDBModel()
+//	{
+//		this.message_sent = false;
+//		this.message_count = 0;
+//		this.id = 0;
+//	}
+//}
 
 public class PendingMessageDBModel
 {
@@ -89,8 +89,6 @@ public class GameManager : MonoBehaviour {
 	PlayerDBModel player_DB_model;
 	string json_pending_message;
 	PendingMessageDBModel pending_DB_model;
-
-	List<PendingMessageDBModel> list_pending_DB;
 
 
 	public void setGameState(gameState gs)
@@ -198,7 +196,7 @@ public class GameManager : MonoBehaviour {
 			// check for errors
 			if (www.error == null)
 			{
-				Debug.Log("WWW post message Ok!: " + www.data);
+				Debug.Log("WWW post message Ok!: " + www.text);
 			} 
 			else 
 			{
@@ -228,7 +226,7 @@ public class GameManager : MonoBehaviour {
 
 		
 			//get next info : pending message
-			WWW www2 = getDataFromDB(request.FindPendingMessages);
+			getDataFromDB(request.FindPendingMessages);
 
 		} 
 		//s 'il y a une erreur, pas le player en question ds la abse => on en créé un
@@ -409,7 +407,7 @@ public class GameManager : MonoBehaviour {
 		setGameState(gameState.splashScreen);
 
 		//get info du player ou créé un player s'il n existe pas 
-		WWW www = getDataFromDB(request.FindExistingPlayer);
+		getDataFromDB(request.FindExistingPlayer);
 	}
 
 	void Update (){

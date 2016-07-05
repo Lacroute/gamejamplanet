@@ -29,7 +29,7 @@ module.exports = function(Player) {
 
 
   // Pick up a Record in the pool
-  Player.listenSpace = function(id, cb) {
+  Player.listenToSpace = function(id, cb) {
     Player.app.models.Record.find(
       {
         where: { author_id: {neq: id} }
@@ -44,15 +44,41 @@ module.exports = function(Player) {
   };
 
   Player.remoteMethod(
-    'listenSpace',
+    'listenToSpace',
     {
       accepts: [
         {arg: 'id', type: 'number', required: true}
       ],
       returns: {arg: 'record', type: 'Object'},
-      http: {path:'/:id/listenSpace', verb: 'get'}
+      http: {path:'/:id/listenToSpace', verb: 'get'}
     }
   );
 
+
+
+  // Pick up a Record in the pool
+  Player.shareRecord = function(id_player, id_new_record, cb) {
+    Player.findById(
+      id_player,
+      function(err, p){
+        if(err) return cb(err);
+        
+        p.sharing_id = id_new_record;
+        cb(null, p);
+      }
+    );
+  };
+
+  Player.remoteMethod(
+    'shareRecord',
+    {
+      accepts: [
+        {arg: 'id_player', type: 'number', required: true},
+        {arg: 'id_new_record', type: 'number', required: true}
+      ],
+      returns: {arg: 'player', type: 'Object'},
+      http: {path:'/:id_player/shareRecord', verb: 'post'}
+    }
+  );
 
 };

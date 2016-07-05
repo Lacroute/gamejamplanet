@@ -12,45 +12,47 @@ public class Player{
 	}
 
 
-	public int hexid; //ok
-	public List<Message> pending_messages;//ok
-	public Message current_message; //ok
+	/******* Online data. *******/
+	// TODO : make everything private
+	private int id;
+	private string hexid;
+	private bool message_sent; // if I already recorded something *** could be replaced by checking if a my_record is set ? ***
+	private int message_count;
+	private int sharing_id; // the id of a shared record.
+
+	private Record my_record;
+	private Record shared_record;
+	/******* End online data. *******/
+
+
+
+	public Message current_message; //ok *** DEPRECATED use Record myrecord instead ***
 	public bool current_message_bool; //ok
 	public GameManager gameManagerScript; //ok
 
 
+	// *** DEPRECATED ? ***
 	public Player(int id, bool b)
 	{
-		this.hexid = id;
-		this.pending_messages = new List<Message>();
+		this.hexid = id.ToString();
 		this.current_message = null;
 		current_message_bool = b;
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
+	// *** END DEPRECATED ? ***
 
 
-	public void setPendingsMessages(List<Message> list)
-	{
-		this.pending_messages = list;
+	// Special constructor for Database connection.
+	public Player(PlayerDBModel player_from_db){
+		this.id = player_from_db.id;
+		this.hexid = player_from_db.hexid;
+		this.message_sent = player_from_db.message_sent;
+		this.message_count = player_from_db.message_count;
+		this.sharing_id = player_from_db.sharing_id;
 	}
 
-	public void addPendingMessage(Message message)
-	{
-		//chekc a faire si message existe
-		this.pending_messages.Add (message);
-	}
-	
-	public void displayInfo()
-	{
-		if (this.pending_messages != null) 
-		{
-			Debug.Log ("Id: " + this.hexid + " currentMessageBool: " + this.current_message_bool + " nbPendingMessages: " + this.pending_messages.Count);
-			foreach (var message in pending_messages) {
-				message.displayMessageInfo ();
-			}
-		}
-	}
 
+	// TODO: little description.
 	public void writeMessage()
 	{
 		/*var input = gameObject.GetComponent<InputField>();
@@ -66,6 +68,8 @@ public class Player{
 		//GameObject idea = Instantiate ();
 	}
 
+
+	// TODO: little description.
 	private void postMessage(string text)
 	{	//j'envoie le message à la db 
 		gameManagerScript.PostDataToDB(text);
@@ -74,17 +78,42 @@ public class Player{
 	}
 
 
-	// Use this for initialization
+
+	// Init.
 	void Start () {
-		
-
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+
+
+	// Property sharing_id.
+	public int SharingId{
+		get { return this.sharing_id;}
+		set { this.sharing_id = value;}
 	}
 
+	// Property my_record.
+	public Record MyRecord{
+		get { return this.my_record;}
+		set { this.my_record = value;}
+	}
 
+	// Property shared_record.
+	public Record SharedRecord{
+		get { return this.shared_record;}
+		set { 
+			this.shared_record = value;
+			// TODO call DBManager shareRecord(id_new_record) to update the DB.
+		}
+	}
+
+	//	Standardize the display of infos.
+	public override string ToString()
+	{
+		string s = string.Format("id: {0}, hexid:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, hexid, message_sent, message_count, sharing_id);
+		if (my_record != null) {
+			s += "\n my_record > " + my_record.ToString ();
+		}
+		return s;
+	}
 }
