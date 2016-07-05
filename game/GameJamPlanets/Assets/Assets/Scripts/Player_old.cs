@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class Player{
-
+public class Player_old{
+	
 	private enum playerState{
 		rookie, //première connexion, aucun message envoyé recu, jamais eu de tuto
 		confirmed, //Déja inscrit, tuto déjà visualisé
@@ -28,22 +28,22 @@ public class Player{
 
 	public Message current_message; //ok *** DEPRECATED use Record myrecord instead ***
 	public bool current_message_bool; //ok
-	public GameManager gameManagerScript; //ok
+	public GameManager_old gameManagerScript; //ok
 
 
 	// *** DEPRECATED ? ***
-	public Player(int id, bool b)
+	public Player_old(int id, bool b)
 	{
 		this.hexid = id.ToString();
 		this.current_message = null;
 		current_message_bool = b;
-		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager_old>();
 	}
 	// *** END DEPRECATED ? ***
 
 
 	// Special constructor for Database connection.
-	public Player(PlayerDBModel player_from_db){
+	public Player_old(PlayerDBModel player_from_db){
 		this.id = player_from_db.id;
 		this.hexid = player_from_db.hexid;
 		this.message_sent = player_from_db.message_sent;
@@ -74,7 +74,7 @@ public class Player{
 	{	//j'envoie le message à la db 
 		gameManagerScript.PostDataToDB(text);
 		//on change d'état, le message est envoyé
-		gameManagerScript.setGameState (GameManager.gameState.freeMessage);
+		gameManagerScript.setGameState (GameManager_old.gameState.freeMessage);
 	}
 
 

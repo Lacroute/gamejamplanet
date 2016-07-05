@@ -39,7 +39,7 @@ public class PendingMessageDBModel
 
 //[{"status":"transit","data":"Message from 1","echo_count":0,"id":1,"author_id":1,"target_id":1}]
 
-public class GameManager : MonoBehaviour {
+public class GameManager_old : MonoBehaviour {
 	
 
 	//UI
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
 
 	public gameState current_game_state;
 
-	public Player current_player;
+	public Player_old current_player;
 
 	//récupération dans la base json => class
 	string json_player_DB_model;
@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour {
 
 			player_DB_model = JsonUtility.FromJson<PlayerDBModel>(json_player_DB_model);
 
-			current_player = new Player(player_DB_model.id, player_DB_model.message_sent);
+			current_player = new Player_old(player_DB_model.id, player_DB_model.message_sent);
 
 			if (player_DB_model.message_sent) 
 			{
@@ -274,7 +274,7 @@ public class GameManager : MonoBehaviour {
 
 					pending_DB_model = JsonUtility.FromJson<PendingMessageDBModel> (pendingMessages [i]);
 					Message m = new Message (pending_DB_model);
-					current_player.addPendingMessage (m);
+//					current_player.addPendingMessage (m);
 				}	
 			}
 			Debug.Log ("All player data loaded");
@@ -396,7 +396,7 @@ public class GameManager : MonoBehaviour {
 		player_DB_model = new PlayerDBModel();
 		json_player_DB_model = JsonUtility.ToJson(player_DB_model);
 
-		list_pending_DB = new List<PendingMessageDBModel> ();
+//		list_pending_DB = new List<PendingMessageDBModel> ();
 		pending_DB_model = new PendingMessageDBModel ();
 		json_pending_message = JsonUtility.ToJson(pending_DB_model);
 

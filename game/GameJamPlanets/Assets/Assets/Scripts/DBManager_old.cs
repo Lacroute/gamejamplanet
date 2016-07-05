@@ -34,12 +34,12 @@ public class DBManager : MonoBehaviour {
 
 	// Next step : store info in a local file.
 	private int my_id_from_local_base = 1;
-	private Player me;
+	private Player_old me;
 	private const string BASE_URL = "http://0.0.0.0:3000/api/";
 
 
 	// Access to the player.
-	public Player getPlayer(){
+	public Player_old getPlayer(){
 		return me;
 	}
 
@@ -85,7 +85,7 @@ public class DBManager : MonoBehaviour {
 		if (request.error == null) 
 		{
 			// Build the player
-			me = new Player(JsonUtility.FromJson<PlayerDBModel>(request.text));
+			me = new Player_old(JsonUtility.FromJson<PlayerDBModel>(request.text));
 			Debug.Log(string.Format("** Me > {0}", me.ToString()));
 		} 
 		else 
@@ -150,7 +150,7 @@ public class DBManager : MonoBehaviour {
 			// Get the first string representation of complex JSONObject.
 			string first_element = getFirstFromJSONString(request.text);
 			// Update me.
-			Player me_updated = new Player (JsonUtility.FromJson<PlayerDBModel> (first_element));
+			Player_old me_updated = new Player_old (JsonUtility.FromJson<PlayerDBModel> (first_element));
 			me.SharingId = me_updated.SharingId;
 			Debug.Log(string.Format("** Player me updated > {0}", me.ToString()));
 		} 
