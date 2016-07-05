@@ -27,10 +27,6 @@ public class RecordDBModel{
 	public RecordDBModel(){
 		
 	}
-
-	public override string ToString(){
-		return string.Format("id: {0}, data:{1}, history:{2}, author_id:{3}",id, data, history, author_id);
-	}
 }
 
 
