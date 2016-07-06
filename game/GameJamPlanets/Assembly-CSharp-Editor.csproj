@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\JSON\Editor\JSONChecker.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Editor\ImageEffects\BloomAndFlaresEditor.cs" />
@@ -70,13 +69,14 @@
      <Compile Include="Assets\Prod\Plugin\Dialoguer\DialogueEditor\Scripts\Editor\Managers\DialogueEditorDataManager.cs" />
      <Compile Include="Assets\Prod\Plugin\Dialoguer\DialogueEditor\Scripts\Editor\ThemeEditorWindow.cs" />
      <Compile Include="Assets\Prod\Plugin\Dialoguer\DialogueEditor\Scripts\Editor\VariableEditorWindow.cs" />
+     <Compile Include="Assets\Prod\Plugin\JSON\Editor\JSONChecker.cs" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
-     <None Include="Assets\JSON\readme.txt" />
+     <None Include="Assets\Prod\Plugin\JSON\readme.txt" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
@@ -188,6 +188,10 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{29B6883A-6D37-86CF-999F-4D6496F974A7}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

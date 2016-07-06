@@ -45,10 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DialoguerOutput\Enums\DialoguerDialogues.cs" />
-     <Compile Include="Assets\JSON\JSONObject.cs" />
-     <Compile Include="Assets\JSON\JSONTemplates.cs" />
-     <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Scripts\AsteroidAnimation.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Scripts\AsteroidInstantiation.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Francis\Scripts\Asteroid_Parent.cs" />
@@ -195,6 +191,10 @@
      <Compile Include="Assets\Prod\Plugin\Dialoguer\Dialoguer\Scripts\Statics\PhaseVarSubStrings.cs" />
      <Compile Include="Assets\Prod\Plugin\Dialoguer\Dialoguer\Scripts\Utilities\DialoguerSerializableDictionary.cs" />
      <Compile Include="Assets\Prod\Plugin\Dialoguer\Dialoguer\Scripts\Utilities\DialoguerUtils.cs" />
+     <Compile Include="Assets\Prod\Plugin\Dialoguer\DialoguerOutput\Enums\DialoguerDialogues.cs" />
+     <Compile Include="Assets\Prod\Plugin\JSON\JSONObject.cs" />
+     <Compile Include="Assets\Prod\Plugin\JSON\JSONTemplates.cs" />
+     <Compile Include="Assets\Prod\Plugin\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\Prod\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Prod\Scripts\Managers\LevelManager.cs" />
      <Compile Include="Assets\Prod\Scripts\Managers\SpawnManager.cs" />
@@ -215,7 +215,7 @@
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
-     <None Include="Assets\JSON\readme.txt" />
+     <None Include="Assets\Prod\Plugin\JSON\readme.txt" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
