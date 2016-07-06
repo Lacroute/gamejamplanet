@@ -8,15 +8,13 @@ public class StatePatternPlayer : MonoBehaviour
 	[HideInInspector] public DefaultState defaultState;
 	[HideInInspector] public SearchIdeaState searchIdeaState;
 	[HideInInspector] public RecordingIdeaState recordingIdeaState;
-	[HideInInspector] public NavMeshAgent navMeshAgent;
 
+	// Awake s'effectue à la création de l'object sur la scène, AVANT Start().
 	private void Awake()
 	{
 		defaultState = new DefaultState (this);
 		searchIdeaState = new SearchIdeaState (this);
 		recordingIdeaState = new RecordingIdeaState (this);
-
-		navMeshAgent = GetComponent<NavMeshAgent> ();
 	}
 
 	void Start () 
@@ -28,9 +26,5 @@ public class StatePatternPlayer : MonoBehaviour
 	{
 		currentState.UpdateState ();
 	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		currentState.OnTriggerEnter (other);
-	}
+		
 }

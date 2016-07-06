@@ -1,15 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SplashState : MonoBehaviour {
+public class SplashState : IGameState 
 
-	// Use this for initialization
-	void Start () {
-	
+{
+	private readonly StatePatternGame gameManager;
+
+	public SplashState (StatePatternGame statePatternGame)
+	{
+		gameManager = statePatternGame	;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void UpdateState()
+	{
+
 	}
+
+	public void ToSplashState()
+	{
+		Debug.Log ("Can't transition to same state");
+	}
+		
+	public void ToIntroState(){
+		gameManager.currentState = gameManager.introState;
+	}
+
+	public void ToInGameState()
+	{
+		gameManager.currentState = gameManager.inGameState;
+	}
+		
 }

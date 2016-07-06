@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+	/// <summary>
+	/// Singleton Pattern pour Gamanager
+	/// Init Game (via LevelManager)
+	/// </summary>
+
 	public class GameManager : MonoBehaviour
 	{
 		//Static instance du GameManager pour le rendre facilement accessible depuis n'importe quel script.
 		public static GameManager GM_instance = null;
 		// Déclaration du levelManager qui s'occupera d'instantier le level.
-		private LevelManager LevelScript;
+		public LevelManager LevelScript;
+		public StatePatternGame GameStateScript;
 
 		void Awake()
 		{
 			
 			// Pattern Singleton toujours à mettre en place pour les managers. 
 			// Il ne doit jamais y avoir plus d'1 seul Manager de même type.
+			// 
 
 
 			// Check si y'a déjà une Instance
@@ -30,19 +37,18 @@ using System.Collections;
 			// On s'assure que le GO contenant le GM n'est pas détruit en cas de chargement.
 			DontDestroyOnLoad(gameObject);
 
-			// On pécho l'instant du LevelManager.
-			LevelScript = GetComponent<LevelManager>();
-
 		// Le GM est dans la place, on peut intitialisé le jeu.
 			InitGame();
 		}
 		
 		void InitGame()
 		{
-			// Pour l'insatnt on call Setup Scene sans paramètre.
-			// Mais on peut lui passer l'état du joueur (à savoir s'il a déjà joué ou nou
-			// Pour skip la sélection de couleur et l'intro.
+
+			// Set Up de la scène
+			// Mais on peut lui passer l'état du joueur (à savoir s'il a déjà joué ou non
+			// Pour skip la sélection de couleur et l'intro par exemple.
 			LevelScript.SetupScene();
 
 		}
+		
 	}

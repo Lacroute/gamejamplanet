@@ -1,15 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IntroState : MonoBehaviour {
+public class IntroState : IGameState 
 
-	// Use this for initialization
-	void Start () {
-	
+{
+	private readonly StatePatternGame gameManager;
+
+	public IntroState (StatePatternGame statePatternGame)
+	{
+		gameManager = statePatternGame	;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void UpdateState()
+	{
+
 	}
+
+	public void ToSplashState()
+	{
+		gameManager.currentState = gameManager.splashState;
+	}
+
+	public void ToIntroState(){
+		Debug.Log ("Can't transition to same state");
+	}
+
+	public void ToInGameState()
+	{
+		gameManager.currentState = gameManager.inGameState;
+	}
+
+
 }
