@@ -13,7 +13,9 @@ public class SplashState : IGameState
 
 	public void UpdateState()
 	{
-
+		if(Input.GetMouseButtonDown(0)){
+			ToIntroState ();
+		}
 	}
 
 	public void ToSplashState()
@@ -22,6 +24,8 @@ public class SplashState : IGameState
 	}
 		
 	public void ToIntroState(){
+
+		GameObject.FindGameObjectWithTag ("P_Title").SetActive (false);
 		gameManager.currentState = gameManager.introState;
 	}
 

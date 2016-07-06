@@ -13,7 +13,7 @@ public class IntroState : IGameState
 
 	public void UpdateState()
 	{
-
+		Debug.Log ("IntroSate");
 	}
 
 	public void ToSplashState()
