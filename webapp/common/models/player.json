@@ -7,7 +7,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "hexid": {
+    "rgba": {
       "type": "string"
     },
     "message_sent": {

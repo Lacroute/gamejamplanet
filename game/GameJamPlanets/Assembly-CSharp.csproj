@@ -144,10 +144,8 @@
      <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\ArriveeMessage_old.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\DBManager.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\DepartMessage_old.cs" />
-     <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\GameManager_old.cs" />
-     <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\Message_old.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\Planet_old.cs" />
-     <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\Player_old.cs" />
+     <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Old_GameJam_Version\Assets\Scripts\Record_old.cs" />
      <Compile Include="Assets\Prod\Resources\JSON\JSONObject.cs" />
      <Compile Include="Assets\Prod\Resources\JSON\JSONTemplates.cs" />

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 // Special class for json library mapping.
 public class PlayerDBModel
 {
 	public int id;
-	public string hexid;
+	public string rgba;
 	public bool message_sent;
 	public int message_count;
 	public int sharing_id;
@@ -34,12 +35,13 @@ public class DBManager : MonoBehaviour {
 
 	// Next step : store info in a local file.
 	private int my_id_from_local_base = 1;
-	private Player_old me;
+	private Player me;
 	private const string BASE_URL = "http://0.0.0.0:3000/api/";
+	private const string LOCAL_DATA_PATHFILE = "data.json";
 
 
 	// Access to the player.
-	public Player_old getPlayer(){
+	public Player getPlayer(){
 		return me;
 	}
 
@@ -50,7 +52,7 @@ public class DBManager : MonoBehaviour {
 //		StartCoroutine(findMyRecord());
 //		StartCoroutine(listenToSpace());
 //		StartCoroutine(shareRecord(2));
-
+		readLocalData(LOCAL_DATA_PATHFILE);
 	}
 		
 
@@ -85,7 +87,7 @@ public class DBManager : MonoBehaviour {
 		if (request.error == null) 
 		{
 			// Build the player
-			me = new Player_old(JsonUtility.FromJson<PlayerDBModel>(request.text));
+			me = new Player(JsonUtility.FromJson<PlayerDBModel>(request.text));
 			Debug.Log(string.Format("** Me > {0}", me.ToString()));
 		} 
 		else 
@@ -135,7 +137,6 @@ public class DBManager : MonoBehaviour {
 	}
 
 
-
 	// Update Database with a new shared record.
 	IEnumerator shareRecord(int id_new_record) {
 
@@ -150,7 +151,7 @@ public class DBManager : MonoBehaviour {
 			// Get the first string representation of complex JSONObject.
 			string first_element = getFirstFromJSONString(request.text);
 			// Update me.
-			Player_old me_updated = new Player_old (JsonUtility.FromJson<PlayerDBModel> (first_element));
+			Player me_updated = new Player (JsonUtility.FromJson<PlayerDBModel> (first_element));
 			me.SharingId = me_updated.SharingId;
 			Debug.Log(string.Format("** Player me updated > {0}", me.ToString()));
 		} 
@@ -160,4 +161,65 @@ public class DBManager : MonoBehaviour {
 		} 
 	}
 
+
+	// Create a new player.
+	IEnumerator createPlayer(string rgba) {
+
+		WWWForm form = new WWWForm();
+		form.AddField("rgba", rgba);
+
+		WWW request = buildRequest ("Players/", form);
+		yield return request;
+
+		if (request.error == null) 
+		{
+			me = new Player (JsonUtility.FromJson<PlayerDBModel> (request.text));
+			Debug.Log(string.Format("** Player me > {0}", me.ToString()));
+			// Write file
+			using (FileStream fs = new FileStream(LOCAL_DATA_PATHFILE, FileMode.Create)){
+				using (StreamWriter writer = new StreamWriter(fs)){
+					writer.Write(request.text);
+				}
+			}
+
+		} 
+		else 
+		{
+			Debug.Log(string.Format("** ERROR Request: {0}", request.text));
+		} 
+	}
+
+
+	// Read local data
+	public void readLocalData(string path){
+		try {  
+			Debug.Log("Reading local data...");
+
+			StreamReader sr = new StreamReader(LOCAL_DATA_PATHFILE);
+			string local_data = sr.ReadToEnd();
+			sr.Close();
+
+			me = new Player(JsonUtility.FromJson<PlayerDBModel>(local_data));
+			Debug.Log(string.Format("** Player me > {0}", me.ToString()));
+
+		} catch (FileNotFoundException e) {
+			Debug.Log ("** No local data found, creating a new Player...");
+
+			Color random_color = Random.ColorHSV();
+			string[] random_color_strings = new string[] {
+				random_color.r.ToString ("0.0000"),
+				random_color.g.ToString ("0.0000"),
+				random_color.b.ToString ("0.0000"),
+				random_color.a.ToString ("0.0000")
+			};
+
+			// Create a new Player with random rgba string
+			StartCoroutine(
+				createPlayer(string.Join(",", random_color_strings))
+			);
+
+		} catch (IOException e) {  
+			Debug.Log(e.ToString());  
+		}
+	}
 }
