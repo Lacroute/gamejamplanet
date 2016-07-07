@@ -15,6 +15,7 @@ public class Player{
 	private int sharing_id;
 	/******* End online data. *******/
 
+	private Color my_color;
 	private Record my_record;
 	private Record shared_record;
 
@@ -26,6 +27,14 @@ public class Player{
 		this.message_sent = player_from_db.message_sent;
 		this.message_count = player_from_db.message_count;
 		this.sharing_id = player_from_db.sharing_id;
+
+		string[] tmp = player_from_db.rgba.Split (',');
+		this.my_color = new Color (
+			float.Parse (tmp [0]),
+			float.Parse (tmp [1]),
+			float.Parse (tmp [2]),
+			float.Parse (tmp [3])
+		);
 	}
 		
 
@@ -43,6 +52,13 @@ public class Player{
 	}
 
 
+	// Property my_color.
+	public Color MyColor{
+		get { return this.my_color;}
+		set { this.my_color = value;}
+	}
+
+
 	// Property shared_record.
 	public Record SharedRecord{
 		get { return this.shared_record;}
@@ -56,7 +72,7 @@ public class Player{
 	//	Standardize the display of infos.
 	public override string ToString()
 	{
-		string s = string.Format("id: {0}, rgba:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, rgba, message_sent, message_count, sharing_id);
+		string s = string.Format("id: {0}, my_color:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, my_color.ToString(), message_sent, message_count, sharing_id);
 		if (my_record != null) {
 			s += "\n my_record > " + my_record.ToString ();
 		}
