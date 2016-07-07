@@ -3,12 +3,11 @@ using System.Collections;
 
 // Etat du joueur quand il regarde sa galaxie et ne fait rien.
 
-public class DefaultState : IPlayerState 
-
+public class DefaultPlayerState : IPlayerState 
 {
 	private readonly StatePatternPlayer player;
 
-	public DefaultState (StatePatternPlayer statePatternPlayer)
+	public DefaultPlayerState (StatePatternPlayer statePatternPlayer)
 	{
 		player = statePatternPlayer	;
 	}

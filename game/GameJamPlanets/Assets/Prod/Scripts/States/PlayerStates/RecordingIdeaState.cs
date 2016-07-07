@@ -26,7 +26,7 @@ public class RecordingIdeaState : IPlayerState
 	}
 
 	public void ToDefaultState(){
-		player.currentState = player.defaultState;
+		player.currentState = player.defaultPlayerState;
 	}
 
 	public void ToSearchIdeaState()
