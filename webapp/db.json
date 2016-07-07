@@ -1,14 +1,16 @@
 {
   "ids": {
-    "Player": 4,
+    "Player": 10,
     "Record": 11,
     "Pendingbox": 28
   },
   "models": {
     "Player": {
-      "1": "{\"hexid\":\"#c93b25\",\"message_sent\":true,\"message_count\":0,\"id\":1,\"sharing_id\":2}",
+      "1": "{\"rgba\":\"0.3577,0.2921,0.4907,1.0000\",\"message_sent\":true,\"message_count\":0,\"id\":1,\"sharing_id\":2}",
       "2": "{\"message_sent\":true,\"message_count\":0,\"id\":2,\"sharing_id\":2}",
-      "3": "{\"message_sent\":true,\"message_count\":0,\"id\":3,\"sharing_id\":3}"
+      "3": "{\"message_sent\":true,\"message_count\":0,\"id\":3,\"sharing_id\":3}",
+      "8": "{\"message_sent\":false,\"message_count\":0,\"hexid\":\"0.0854,0.3543,0.3632,1.0000\",\"id\":8}",
+      "9": "{\"rgba\":\"0.1255,0.2472,0.3505,1.0000\",\"message_sent\":false,\"message_count\":0,\"id\":9}"
     },
     "Record": {
       "1": "{\"data\":\"SAVE P1\",\"history\":0,\"author_id\":1,\"id\":1}",
