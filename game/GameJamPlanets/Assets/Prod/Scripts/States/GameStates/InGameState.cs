@@ -11,6 +11,10 @@ public class InGameState : IGameState
 		gameManager = statePatternGame	;
 	}
 
+	public void Start(){
+		
+	}
+
 	public void UpdateState()
 	{
 

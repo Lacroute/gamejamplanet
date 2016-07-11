@@ -11,6 +11,10 @@ public class SplashState : IGameState
 		gameManager = statePatternGame	;
 	}
 
+	public void Start(){
+
+	}
+
 	public void UpdateState()
 	{
 		if(Input.GetMouseButtonDown(0)){
@@ -27,6 +31,7 @@ public class SplashState : IGameState
 
 		GameObject.FindGameObjectWithTag ("P_Title").SetActive (false);
 		gameManager.currentState = gameManager.introState;
+		gameManager.introState.Start ();
 	}
 
 	public void ToInGameState()

@@ -9,6 +9,7 @@ public class StatePatternGame : MonoBehaviour
 	[HideInInspector] public IntroState introState;
 	[HideInInspector] public InGameState inGameState;
 
+
 	// Awake s'effectue à la création de l'object sur la scène, AVANT Start().
 	private void Awake()
 	{
@@ -26,5 +27,6 @@ public class StatePatternGame : MonoBehaviour
 	{
 		currentState.UpdateState ();
 	}
+		
 		
 }

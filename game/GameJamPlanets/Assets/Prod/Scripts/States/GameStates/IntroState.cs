@@ -6,6 +6,10 @@ public class IntroState : IGameState
 {
 	private readonly StatePatternGame gameManager;
 
+	public void Start(){
+		Debug.Log ("EnteringIntro");
+	}
+
 	public IntroState (StatePatternGame statePatternGame)
 	{
 		gameManager = statePatternGame	;
