@@ -26,6 +26,7 @@ public class RecordingIdeaState : IPlayerState
 	}
 
 	public void ToDefaultState(){
+		
 		player.currentState = player.defaultPlayerState;
 	}
 

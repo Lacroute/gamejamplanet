@@ -155,10 +155,13 @@
      <Compile Include="Assets\Prod\Scripts\Managers\SpawnManager.cs" />
      <Compile Include="Assets\Prod\Scripts\Planet\TitleScript.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IGameState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\GameStates\InGameState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IntroState.cs" />
+     <Compile Include="Assets\Prod\Scripts\States\GameStates\ListeningRecordState.cs" />
+     <Compile Include="Assets\Prod\Scripts\States\GameStates\RecordingPlanetState.cs" />
+     <Compile Include="Assets\Prod\Scripts\States\GameStates\SendingRecordState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\SplashState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\StatePatternGame.cs" />
+     <Compile Include="Assets\Prod\Scripts\States\GameStates\ViewPlanetState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\PlanetStates\DefaultPlanetState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\PlanetStates\IPlanetState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\PlanetStates\StatePatternPlanet.cs" />

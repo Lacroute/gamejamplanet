@@ -80,7 +80,7 @@ public class DBManager : MonoBehaviour {
 
 
 	// Find me.
-	IEnumerator findMe() {
+	public IEnumerator findMe() {
 		WWW request = buildRequest ("Players/" + my_id_from_local_base);
 		yield return request;
 
