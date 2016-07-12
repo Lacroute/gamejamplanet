@@ -11,7 +11,11 @@ using System.Collections;
 		
 		GameObject ToFadeObject = GameObject.Find (uiObjectNameToFade);
 
-		if(ToFadeObject.tag == "guiText"){
+		if(ToFadeObject.tag == "Untagged"){
+			Debug.Log ("Il faut ajouter un tag à " + ToFadeObject.transform.name + " pour que le fade fonctionne");
+		}
+
+		else if(ToFadeObject.tag == "guiText"){
 		ToFadeObject.GetComponent<Animator> ().SetTrigger ("FadeInTrigger");
 		} 
 
@@ -26,7 +30,11 @@ using System.Collections;
 
 		GameObject ToFadeObject = GameObject.Find (uiObjectNameToFade);
 
-		if (ToFadeObject.tag == "guiText") {
+		if(ToFadeObject.tag == "Untagged"){
+			Debug.Log ("Il faut ajouter un tag à " + ToFadeObject.transform.name + " pour que le fade fonctionne");
+		}
+
+		else if (ToFadeObject.tag == "guiText") {
 			ToFadeObject.GetComponent<Animator> ().SetTrigger ("FadeOutTrigger");
 		}
 
