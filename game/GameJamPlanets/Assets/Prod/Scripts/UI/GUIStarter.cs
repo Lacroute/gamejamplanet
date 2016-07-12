@@ -3,8 +3,15 @@ using System.Collections;
 
 public class GUIStarter : MonoBehaviour {
 
+	IEnumerator TestButtonFade (){
+		string uiObjectNameToFade = "B_SuivantIntroButton";
+		GetComponent<GUIManager> ().FadeIn (uiObjectNameToFade);
+		yield return new WaitForSeconds (3F);
+		GetComponent<GUIManager> ().FadeOut (uiObjectNameToFade);
+
+	}
+
 	void Awake(){
-		string uiObjectNameToFadeIn = "T_Intro_1";
-		GetComponent<GUIManager> ().FadeIn (uiObjectNameToFadeIn);
+		StartCoroutine ("TestButtonFade");
 	}
 }
