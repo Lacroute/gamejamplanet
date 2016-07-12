@@ -5,21 +5,22 @@ public class StatePatternPlayer : MonoBehaviour
 {
 
 	[HideInInspector] public IPlayerState currentState;
-	[HideInInspector] public DefaultState defaultState;
+	[HideInInspector] public DefaultPlayerState defaultPlayerState;
 	[HideInInspector] public SearchIdeaState searchIdeaState;
 	[HideInInspector] public RecordingIdeaState recordingIdeaState;
+	//[HideInInspector] public RecordingIdeaState sendIdeaState; ????
 
 	// Awake s'effectue à la création de l'object sur la scène, AVANT Start().
 	private void Awake()
 	{
-		defaultState = new DefaultState (this);
+		defaultPlayerState = new DefaultPlayerState (this);
 		searchIdeaState = new SearchIdeaState (this);
 		recordingIdeaState = new RecordingIdeaState (this);
 	}
 
 	void Start () 
 	{
-		currentState = defaultState;
+		currentState = defaultPlayerState;
 	}
 
 	void Update () 

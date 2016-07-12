@@ -1,33 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IntroState : IGameState 
+public class RecordingPlanetState : IGameState {
 
-{
+	// Use this for initialization
 	private readonly StatePatternGame gameManager;
 
-	public void Start(){
-		Debug.Log ("EnteringIntro");
-	}
-
-	public IntroState (StatePatternGame statePatternGame)
+	public RecordingPlanetState (StatePatternGame statePatternGame)
 	{
 		gameManager = statePatternGame	;
 	}
 
 	public void UpdateState()
 	{
-		
+
 	}
 
 	public void DoBeforeEntering()
 	{
-		Debug.Log ("Before Entering introState");
+
 	}
 
 	public void DoBeforeLeaving()
 	{
-		Debug.Log ("Before Leaving introState");
+
 	}
 
 	public void ToSplashState()
@@ -36,18 +32,17 @@ public class IntroState : IGameState
 	}
 
 	public void ToIntroState(){
-		Debug.Log ("Can't transition to same state");
+		gameManager.currentState = gameManager.introState;
 	}
 
 	public void ToViewPlanetState()
 	{
-		Debug.Log ("Transition: " + gameManager.currentState.ToString() + " to ViewPlanetState");
 		gameManager.currentState = gameManager.viewPlanetState;
 	}
 
 	public void ToRecordingPlanetState()
 	{
-		gameManager.currentState = gameManager.recordingPlanetState;
+		Debug.Log ("Can't transition to same state");
 	}
 
 	public void ToListeningRecordState()
@@ -59,6 +54,5 @@ public class IntroState : IGameState
 	{
 		gameManager.currentState = gameManager.sendingRecordState;
 	}
-
 
 }
