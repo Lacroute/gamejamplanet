@@ -18,7 +18,6 @@ webapp/coverage
 webapp/node_modules
 npm-debug.log
 
-
 game/GameJamPlanets/[Ll]ibrary/
 game/GameJamPlanets/[Tt]emp/
 game/GameJamPlanets/[Oo]bj/
@@ -41,7 +40,7 @@ ExportedObj/
 
 
 # Unity3D generated meta files
-*.pidb.meta (?? pourquoi par *.meta)
+*.pidb.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
@@ -50,4 +49,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-./game/GameJamPlanets/Assets/Assets/Clemi/_samples/
+game/GameJamPlanets/Assets/Assets/Clemi/_samples/
