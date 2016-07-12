@@ -23,7 +23,7 @@ public class RecordDBModel{
 
 public class ModelController : MonoBehaviour {
 
-	private const string BASE_URL = "http://0.0.0.0:3000/api/";
+	private const string BASE_URL = "http://record-gamejam.rhcloud.com";
 	private const string LOCAL_DATA_PATHFILE = "data.json";
 
 	private Player player;
