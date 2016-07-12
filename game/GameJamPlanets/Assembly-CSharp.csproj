@@ -155,7 +155,6 @@
      <Compile Include="Assets\Prod\Scripts\Model\Record.cs" />
      <Compile Include="Assets\Prod\Scripts\Planet\TitleScript.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IGameState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\GameStates\InGameState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IntroState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\ListeningRecordState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\RecordingPlanetState.cs" />
@@ -163,14 +162,8 @@
      <Compile Include="Assets\Prod\Scripts\States\GameStates\SplashState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\StatePatternGame.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\ViewPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\DefaultPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\IPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\StatePatternPlanet.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\DefaultPlayerState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\IPlayerState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\RecordingIdeaState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\SearchIdeaState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\StatePatternPlayer.cs" />
+     <Compile Include="Assets\Prod\Scripts\UI\GUIManager.cs" />
+     <Compile Include="Assets\Prod\Scripts\UI\GUIStarter.cs" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

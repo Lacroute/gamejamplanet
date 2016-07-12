@@ -58,13 +58,11 @@ public class SplashState : IGameState
 		gameManager.currentState.DoBeforeLeaving();
 
 		gameManager.currentState = gameManager.introState;
-<<<<<<< HEAD
+
 		gameManager.introState.Start ();
-=======
+
 
 		gameManager.currentState.DoBeforeEntering ();
-
-
 
 	}
 
@@ -84,7 +82,7 @@ public class SplashState : IGameState
 	{
 		Debug.Log ("Can't transition from: " + gameManager.currentState.ToString() + " to: ListeningRecordState");
 		//gameManager.currentState = gameManager.listeningRecordState;
->>>>>>> fa63606eb6e34166a2ca5d3c908682e8932773e2
+
 	}
 
 	public void ToSendingRecordState()
