@@ -23,7 +23,7 @@ public class RecordDBModel{
 
 public class ModelController : MonoBehaviour {
 
-	private const string BASE_URL = "http://record-gamejam.rhcloud.com";
+	private const string BASE_URL = "http://record-gamejam.rhcloud.com/api/";
 	private const string LOCAL_DATA_PATHFILE = "data.json";
 
 	private Player player;
@@ -78,23 +78,20 @@ public class ModelController : MonoBehaviour {
 
 	// Find me.
 	IEnumerator findMe() {
-		Debug.Log ("FindMe");
-		int the_id = 1;
-		if (player != null) {
-			the_id = player.Id;
-		}
-		WWW request = buildRequest ("Players/" + the_id);
-		yield return request;
+		if (player == null) {
+			getLocalData ();
+			yield return null;
+		} else {
+			WWW request = buildRequest ("Players/" + player.Id);
+			yield return request;
 
-		if (request.error == null) 
-		{
-			// Build the player
-			player = new Player(JsonUtility.FromJson<PlayerDBModel>(request.text));
-			Debug.Log(string.Format("** Me > {0}", player.ToString()));
-		} 
-		else 
-		{
-			Debug.Log(string.Format("** ERROR Request: {0}", request.text));
+			if (request.error == null) {
+				// Build the player
+				player = new Player (JsonUtility.FromJson<PlayerDBModel> (request.text));
+				Debug.Log (string.Format ("** Me > {0}", player.ToString ()));
+			} else {
+				Debug.Log (string.Format ("** ERROR Request: {0}", request.text));
+			}
 		}
 		yield return null;
 	}
