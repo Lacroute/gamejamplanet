@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IGameState
+public interface IGameState 
 {
 	void UpdateState();
+
+	void DoBeforeEntering();
+
+	void DoBeforeLeaving();
 
 	void ToSplashState();
 
 	void ToIntroState();
 
-	void ToInGameState();
+	void ToViewPlanetState();
+
+	void ToRecordingPlanetState();
+
+	void ToListeningRecordState();
+
+	void ToSendingRecordState();
+
 
 }
