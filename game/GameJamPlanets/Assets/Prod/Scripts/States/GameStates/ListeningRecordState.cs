@@ -11,11 +11,13 @@ public class ListeningRecordState : IGameState {
 		gameManager = statePatternGame;
 	}
 
+	public void Start(){}
+
 	public void UpdateState()
 	{
 
 	}
-
+		
 	public void DoBeforeEntering()
 	{
 		Debug.Log ("Before Entering " + gameManager.currentState);

@@ -162,14 +162,8 @@
      <Compile Include="Assets\Prod\Scripts\States\GameStates\SplashState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\StatePatternGame.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\ViewPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\DefaultPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\IPlanetState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlanetStates\StatePatternPlanet.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\DefaultPlayerState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\IPlayerState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\RecordingIdeaState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\SearchIdeaState.cs" />
-     <Compile Include="Assets\Prod\Scripts\States\PlayerStates\StatePatternPlayer.cs" />
+     <Compile Include="Assets\Prod\Scripts\UI\GUIManager.cs" />
+     <Compile Include="Assets\Prod\Scripts\UI\GUIStarter.cs" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

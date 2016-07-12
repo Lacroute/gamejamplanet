@@ -13,6 +13,10 @@ public class SplashState : IGameState
 		gameManager = statePatternGame	;
 	}
 
+	public void Start(){
+
+	}
+
 	public void UpdateState()
 	{
 		if(Input.GetMouseButtonDown(0)){
@@ -55,9 +59,10 @@ public class SplashState : IGameState
 
 		gameManager.currentState = gameManager.introState;
 
+		gameManager.introState.Start ();
+
+
 		gameManager.currentState.DoBeforeEntering ();
-
-
 
 	}
 
@@ -77,6 +82,7 @@ public class SplashState : IGameState
 	{
 		Debug.Log ("Can't transition from: " + gameManager.currentState.ToString() + " to: ListeningRecordState");
 		//gameManager.currentState = gameManager.listeningRecordState;
+
 	}
 
 	public void ToSendingRecordState()
