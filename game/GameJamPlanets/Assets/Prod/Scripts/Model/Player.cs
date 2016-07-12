@@ -38,28 +38,16 @@ public class Player{
 	}
 		
 
-	// Property sharing_id.
-	public int SharingId{
-		get { return this.sharing_id;}
-		set { this.sharing_id = value;}
-	}
 
+	// Properties.
+	public int Id{ get; set;}
 
-	// Property my_record.
-	public Record MyRecord{
-		get { return this.my_record;}
-		set { this.my_record = value;}
-	}
+	public int SharingId{ get; set;}
 
+	public Record MyRecord{ get; set;}
 
-	// Property my_color.
-	public Color MyColor{
-		get { return this.my_color;}
-		set { this.my_color = value;}
-	}
+	public Color MyColor{ get; set;}
 
-
-	// Property shared_record.
 	public Record SharedRecord{
 		get { return this.shared_record;}
 		set { 
