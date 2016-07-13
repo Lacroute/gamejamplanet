@@ -10,9 +10,7 @@ public class SendingRecordState : IGameState {
 	{
 		gameManager = statePatternGame;
 	}
-
-	public void Start(){}
-
+		
 	public void UpdateState()
 	{
 

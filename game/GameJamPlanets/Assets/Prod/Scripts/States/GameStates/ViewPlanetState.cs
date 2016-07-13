@@ -10,8 +10,7 @@ public class ViewPlanetState : IGameState
 	{
 		gameManager = statePatternGame	;
 	}
-
-	public void Start(){}
+		
 
 	public void UpdateState()
 	{
