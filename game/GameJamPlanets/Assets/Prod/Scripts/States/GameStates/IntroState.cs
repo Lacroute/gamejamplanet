@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class IntroState : IGameState 
 
 {
@@ -19,6 +20,7 @@ public class IntroState : IGameState
 
 	public void DoBeforeEntering()
 	{
+		
 		Debug.Log ("Before Entering introState");
 		GameObject.Find ("P_GameManager").GetComponent<GUIManager> ().StartCoroutine ("LaunchIntro");
 	}

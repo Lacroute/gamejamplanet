@@ -15,7 +15,7 @@ public class StatePatternGame : MonoBehaviour
 
 
 	// Awake s'effectue à la création de l'object sur la scène, AVANT Start().
-	private void Awake()
+	void Awake()
 	{
 		splashState = new SplashState (this);
 		introState = new IntroState (this);
