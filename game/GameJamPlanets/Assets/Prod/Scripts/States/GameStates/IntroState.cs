@@ -32,7 +32,6 @@ public class IntroState : IGameState
 		// s'il a déjà hosté ou non un record
 		// S'il a un record en voyage ou non
 
-		Debug.Log (gameManager.GetComponent<ModelController> ().player.MyColor);
 
 			
 	}
