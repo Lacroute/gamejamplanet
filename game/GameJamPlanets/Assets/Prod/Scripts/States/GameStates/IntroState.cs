@@ -23,6 +23,8 @@ public class IntroState : IGameState
 		
 		Debug.Log ("Before Entering introState");
 		GameObject.Find ("P_GameManager").GetComponent<GUIManager> ().StartCoroutine ("LaunchIntro");
+
+		Debug.Log (GameObject.Find ("P_GameManager").GetComponent<ModelController>().Player.MyColor);
 	}
 
 	public void DoBeforeLeaving()

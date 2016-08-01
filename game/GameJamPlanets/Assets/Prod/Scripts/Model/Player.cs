@@ -15,7 +15,6 @@ public class Player{
 	private int sharing_id; // Id of the hosted record
 	/******* End online data. *******/
 
-	private Color my_color;
 	private Record my_record;
 	private Record shared_record;
 
@@ -29,7 +28,7 @@ public class Player{
 		this.sharing_id = player_from_db.sharing_id;
 
 		string[] tmp = player_from_db.rgba.Split (',');
-		this.my_color = new Color (
+		this.MyColor = new Color (
 			float.Parse (tmp [0]),
 			float.Parse (tmp [1]),
 			float.Parse (tmp [2]),
@@ -64,7 +63,7 @@ public class Player{
 	//	Standardize the display of infos.
 	public override string ToString()
 	{
-		string s = string.Format("id: {0}, my_color:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, my_color.ToString(), message_sent, message_count, sharing_id);
+		string s = string.Format("id: {0}, my_color:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, MyColor.ToString(), message_sent, message_count, sharing_id);
 		if (this.MyRecord != null) {
 			s += "\n my_record > " + this.MyRecord.ToString ();
 		}
