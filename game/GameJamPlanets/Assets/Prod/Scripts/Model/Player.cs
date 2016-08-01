@@ -65,11 +65,11 @@ public class Player{
 	public override string ToString()
 	{
 		string s = string.Format("id: {0}, my_color:{1}, message_sent:{2}, message_count:{3}, sharing_id:{4}",id, my_color.ToString(), message_sent, message_count, sharing_id);
-		if (my_record != null) {
-			s += "\n my_record > " + my_record.ToString ();
+		if (this.MyRecord != null) {
+			s += "\n my_record > " + this.MyRecord.ToString ();
 		}
-		if (shared_record != null) {
-			s += "\n shared_record > " + shared_record.ToString ();
+		if (this.SharedRecord != null) {
+			s += "\n shared_record > " + this.SharedRecord.ToString ();
 		}
 		return s;
 	}

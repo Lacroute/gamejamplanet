@@ -33,9 +33,7 @@ public class ModelController : MonoBehaviour {
 
 	// Init.
 	void Start () {
-		Debug.Log ("START");
 		initPlayer ();
-		Debug.Log ("END START");
 
 		/// Everything is stored in the managner
 		///   >  to access to the player call my_model_controller.Player
@@ -55,8 +53,7 @@ public class ModelController : MonoBehaviour {
 
 
 	void Update(){
-		if(isSent ())
-			Debug.Log("YES");
+
 	}
 		
 
@@ -67,16 +64,18 @@ public class ModelController : MonoBehaviour {
 
 
 	public void initPlayer(){
-
-		// Handle the record into a callback to wait for the server response.
-		StartCoroutine( findMe((player) => {
-			if(player != null){
-				var req = StartCoroutine (findMyRecord ());
-			}
-		}));
+		StartCoroutine( FindMeAndMyRecord() );
 	}
 
 
+
+	public IEnumerator FindMeAndMyRecord(){
+		print( "Find or Create player. t=" + Time.time );
+		yield return StartCoroutine( findMe() );
+		print( "Find his record. t=" + Time.time );
+		yield return StartCoroutine( findMyRecord() );
+		print( "Data cached. t=" + Time.time );
+	}
 
 
 
@@ -90,7 +89,8 @@ public class ModelController : MonoBehaviour {
 	/// Finds me. If no player is set, then read the local data first.
 	/// </summary>
 	/// <returns>Set me.</returns>
-	IEnumerator findMe(System.Action<Player> callback) {
+//	IEnumerator findMe(System.Action<Player> callback) {
+	IEnumerator findMe() {
 		if (player == null) {
 			getLocalData ();
 		} else {
@@ -101,10 +101,8 @@ public class ModelController : MonoBehaviour {
 				// Build the player
 				player = new Player (JsonUtility.FromJson<PlayerDBModel> (request.text));
 				Debug.Log (string.Format ("** Me > {0}", player.ToString ()));
-				callback (player);
 			} else {
 				Debug.Log (string.Format ("** ERROR Request: {0}", request.text));
-				callback (null);
 			}
 		}
 	}
@@ -115,7 +113,6 @@ public class ModelController : MonoBehaviour {
 	/// </summary>
 	/// <returns>Set my record.</returns>
 	IEnumerator findMyRecord() {
-		Debug.Log (player.Id);
 		WWW request = buildRequest ("Records/findOne?filter={\"where\":{\"author_id\":"+ player.Id + "}}");
 		yield return request;
 
@@ -206,7 +203,7 @@ public class ModelController : MonoBehaviour {
 		if (request.error == null) 
 		{
 			player = new Player (JsonUtility.FromJson<PlayerDBModel> (request.text));
-			Debug.Log(string.Format("** Player me > {0}", player.ToString()));
+			Debug.Log(string.Format("** Me > {0}", player.ToString()));
 			// Write file
 			using (FileStream fs = new FileStream(LOCAL_DATA_PATHFILE, FileMode.Create)){
 				using (StreamWriter writer = new StreamWriter(fs)){
