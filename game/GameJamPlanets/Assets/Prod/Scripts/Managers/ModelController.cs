@@ -29,8 +29,6 @@ public class ModelController : MonoBehaviour {
 	private Player player;
 	public Record tmp_record;
 
-
-
 	// Init.
 	void Start () {
 		initPlayer ();

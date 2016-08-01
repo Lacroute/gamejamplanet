@@ -153,6 +153,7 @@
      <Compile Include="Assets\Prod\Scripts\Managers\SpawnManager.cs" />
      <Compile Include="Assets\Prod\Scripts\Model\Player.cs" />
      <Compile Include="Assets\Prod\Scripts\Model\Record.cs" />
+     <Compile Include="Assets\Prod\Scripts\Planet\PlanetScript.cs" />
      <Compile Include="Assets\Prod\Scripts\Planet\TitleScript.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IGameState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\IntroState.cs" />

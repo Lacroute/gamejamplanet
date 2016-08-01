@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class IntroState : IGameState 
 
 {
@@ -20,7 +19,6 @@ public class IntroState : IGameState
 
 	public void DoBeforeEntering()
 	{
-		
 		Debug.Log ("Before Entering introState");
 		GameObject.Find ("P_GameManager").GetComponent<GUIManager> ().StartCoroutine ("LaunchIntro");
 
@@ -35,6 +33,7 @@ public class IntroState : IGameState
 		// Si y'a déjà un player ou non 
 		// s'il a déjà hosté ou non un record
 		// S'il a un record en voyage ou non
+
 
 			
 	}
@@ -52,7 +51,7 @@ public class IntroState : IGameState
 	{
 		gameManager.currentState.DoBeforeLeaving ();
 		gameManager.currentState = gameManager.viewPlanetState;
-		gameManager.currentState.DoBeforeEntering ();
+		gameManager.currentState.DoBeforeEntering  ();
 	}
 
 	public void ToRecordingPlanetState()
