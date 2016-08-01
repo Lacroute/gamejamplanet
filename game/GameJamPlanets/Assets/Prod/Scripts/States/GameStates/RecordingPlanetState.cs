@@ -11,8 +11,6 @@ public class RecordingPlanetState : IGameState {
 		gameManager = statePatternGame	;
 	}
 
-	public void Start(){}
-
 	public void UpdateState()
 	{
 

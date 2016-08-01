@@ -162,6 +162,7 @@
      <Compile Include="Assets\Prod\Scripts\States\GameStates\SplashState.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\StatePatternGame.cs" />
      <Compile Include="Assets\Prod\Scripts\States\GameStates\ViewPlanetState.cs" />
+     <Compile Include="Assets\Prod\Scripts\UI\GUIEffects.cs" />
      <Compile Include="Assets\Prod\Scripts\UI\GUIManager.cs" />
      <Compile Include="Assets\Prod\Scripts\UI\GUIStarter.cs" />
      <None Include="Assets\Old_GameJam_Version\Assets\Francis\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

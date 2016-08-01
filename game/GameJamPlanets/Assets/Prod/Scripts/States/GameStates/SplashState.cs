@@ -13,13 +13,10 @@ public class SplashState : IGameState
 		gameManager = statePatternGame	;
 	}
 
-	public void Start(){
-
-	}
 
 	public void UpdateState()
 	{
-		if(Input.GetMouseButtonDown(0)){
+		if(GameObject.FindWithTag("P_Title").GetComponent<TitleScript>().introIsFinished == true && Input.GetMouseButtonDown(0)){
 			ToIntroState ();
 		}
 	}
@@ -32,6 +29,7 @@ public class SplashState : IGameState
 	public void DoBeforeLeaving()
 	{
 		Debug.Log ("Before Leaving SplashTest");
+		GameObject.FindGameObjectWithTag ("P_Title").SetActive (false);
 
 	}
 
@@ -58,9 +56,6 @@ public class SplashState : IGameState
 		gameManager.currentState.DoBeforeLeaving();
 
 		gameManager.currentState = gameManager.introState;
-
-		gameManager.introState.Start ();
-
 
 		gameManager.currentState.DoBeforeEntering ();
 

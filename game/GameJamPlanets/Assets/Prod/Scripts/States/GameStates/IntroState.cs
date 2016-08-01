@@ -7,9 +7,6 @@ public class IntroState : IGameState
 {
 	private readonly StatePatternGame gameManager;
 
-	public void Start(){
-		Debug.Log ("EnteringIntro");
-	}
 
 	public IntroState (StatePatternGame statePatternGame)
 	{
@@ -25,11 +22,19 @@ public class IntroState : IGameState
 	{
 		
 		Debug.Log ("Before Entering introState");
+		GameObject.Find ("P_GameManager").GetComponent<GUIManager> ().StartCoroutine ("LaunchIntro");
 	}
 
 	public void DoBeforeLeaving()
 	{
 		Debug.Log ("Before Leaving introState");
+
+		// Ici il faut définir avec le DBManager vers quel état on va 
+		// Si y'a déjà un player ou non 
+		// s'il a déjà hosté ou non un record
+		// S'il a un record en voyage ou non
+
+			
 	}
 
 	public void ToSplashState()
@@ -43,8 +48,9 @@ public class IntroState : IGameState
 
 	public void ToViewPlanetState()
 	{
-		Debug.Log ("Transition: " + gameManager.currentState.ToString() + " to ViewPlanetState");
+		gameManager.currentState.DoBeforeLeaving ();
 		gameManager.currentState = gameManager.viewPlanetState;
+		gameManager.currentState.DoBeforeEntering ();
 	}
 
 	public void ToRecordingPlanetState()

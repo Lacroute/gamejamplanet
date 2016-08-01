@@ -10,9 +10,7 @@ public class ListeningRecordState : IGameState {
 	{
 		gameManager = statePatternGame;
 	}
-
-	public void Start(){}
-
+		
 	public void UpdateState()
 	{
 
