@@ -12,7 +12,7 @@ public class Player{
 	private string rgba;
 	private bool message_sent; // if I already recorded something *** could be replaced by checking if a my_record is set ? ***
 	private int message_count;
-	private int sharing_id;
+	private int sharing_id; // Id of the hosted record
 	/******* End online data. *******/
 
 	private Color my_color;
