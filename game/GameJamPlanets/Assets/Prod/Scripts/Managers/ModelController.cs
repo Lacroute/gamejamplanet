@@ -34,53 +34,65 @@ public class ModelController : MonoBehaviour {
 	// Init.
 	void Start () {
 		Debug.Log ("START");
-		StartCoroutine(findMe());
-		Debug.Log (string.Format("END"));
-//		StartCoroutine(findMyRecord());
-//		StartCoroutine(listenToSpace());
-//		StartCoroutine(shareRecord(2));
-//		getLocalData();
+		initPlayer ();
+		Debug.Log ("END START");
+
+		/// Everything is stored in the managner
+		///   >  to access to the player call my_model_controller.Player
+		///   >  to access to the tmp_record call my_model_controller.TmpRecord
+		/// 
+		/// 
+		/// get the player > StartCoroutine(findMe());
+		/// 
+		/// get the record of the player > StartCoroutine(findMyRecord());
+		/// 
+		/// get a random record from space > StartCoroutine(listenToSpace());
+		/// 
+		/// Update the database with the shared record > StartCoroutine(shareRecord(id_new_record));
+		/// 
+		/// isSent > isSent()
 	}
 
 
-	// 
 	void Update(){
-//		if (player == null) {
-//			Debug.Log ("not loaded yet.");
-//		} else {
-//			Debug.Log ("PLAYER LOADED !");
-//		}
+		if(isSent ())
+			Debug.Log("YES");
+	}
+		
+
+	/////////////////////
+	//    COROUTINE    //
+	//     WRAPPERS    //
+	/////////////////////
+
+
+	public void initPlayer(){
+
+		// Handle the record into a callback to wait for the server response.
+		StartCoroutine( findMe((player) => {
+			if(player != null){
+				var req = StartCoroutine (findMyRecord ());
+			}
+		}));
 	}
 
 
-	// Helper to build clean URL.
-	public WWW buildRequest(string url, WWWForm form = null){
-		Debug.Log ("buildRequest");
-		url = BASE_URL + url;
-		Debug.Log(string.Format("** Request URL : {0}", url));
-		WWW request = new WWW(url);
-
-		if (form != null) {
-			request = new WWW(url, form);
-		}
-			
-		return request;
-	}
 
 
-	// Get the first object from complex JSON string.
-	public string getFirstFromJSONString(string json){
-		JSONObject result = new JSONObject (json);
-		result = (JSONObject)result.list [0];
-		return result.Print();
-	}
+
+	////////////////////
+	//    DATABASE    //
+	//    REQUESTS    //
+	////////////////////
 
 
-	// Find me.
-	IEnumerator findMe() {
+	/// <summary>
+	/// Finds me. If no player is set, then read the local data first.
+	/// </summary>
+	/// <returns>Set me.</returns>
+	IEnumerator findMe(System.Action<Player> callback) {
 		if (player == null) {
 			getLocalData ();
-			yield return null;
 		} else {
 			WWW request = buildRequest ("Players/" + player.Id);
 			yield return request;
@@ -89,17 +101,22 @@ public class ModelController : MonoBehaviour {
 				// Build the player
 				player = new Player (JsonUtility.FromJson<PlayerDBModel> (request.text));
 				Debug.Log (string.Format ("** Me > {0}", player.ToString ()));
+				callback (player);
 			} else {
 				Debug.Log (string.Format ("** ERROR Request: {0}", request.text));
+				callback (null);
 			}
 		}
-		yield return null;
 	}
 
 
-	// Find my record.
+	/// <summary>
+	/// Finds my record.
+	/// </summary>
+	/// <returns>Set my record.</returns>
 	IEnumerator findMyRecord() {
-		WWW request = buildRequest ("Records/findOne?filter={\"where\":{\"id\":1}}");
+		Debug.Log (player.Id);
+		WWW request = buildRequest ("Records/findOne?filter={\"where\":{\"author_id\":"+ player.Id + "}}");
 		yield return request;
 
 		if (request.error == null) 
@@ -111,12 +128,14 @@ public class ModelController : MonoBehaviour {
 		else 
 		{
 			Debug.Log(string.Format("** ERROR Request: {0}", request.text));
-		} 
+		}
 	}
 
 
-	// TODO Handle the record.
-	// Get a random record.
+	/// <summary>
+	/// Listens to the space.
+	/// </summary>
+	/// <returns>Set the tmp_record.</returns>
 	IEnumerator listenToSpace() {
 		WWW request = buildRequest ("Players/" + player.Id + "/listenToSpace");
 		yield return request;
@@ -136,7 +155,11 @@ public class ModelController : MonoBehaviour {
 	}
 
 
-	// Update Database with a new shared record.
+	/// <summary>
+	/// Shares the record, update the bdd.
+	/// </summary>
+	/// <returns>The shared record.</returns>
+	/// <param name="id_new_record">Identifier new record.</param>
 	IEnumerator shareRecord(int id_new_record) {
 
 		WWWForm form = new WWWForm();
@@ -161,9 +184,12 @@ public class ModelController : MonoBehaviour {
 	}
 
 
-	// Create a new player.
+	/// <summary>
+	/// Creates the player.
+	/// </summary>
+	/// <returns>The player.</returns>
+	/// <param name="rgba">Rgba.</param>
 	IEnumerator createPlayer(Color rgba) {
-		// 
 		string[] rgba_strings = new string[] {
 			rgba.r.ToString ("0.0000"),
 			rgba.g.ToString ("0.0000"),
@@ -196,7 +222,16 @@ public class ModelController : MonoBehaviour {
 	}
 
 
-	// Read local data
+	///////////////////
+	//    HELPERS    //
+	///////////////////
+ 
+
+
+	/// <summary>
+	/// Gets the local data.
+	/// </summary>
+	/// <param name="path">Path of data.json</param>
 	public void getLocalData(string path = LOCAL_DATA_PATHFILE){
 		try {  
 			Debug.Log("Reading local data...");
@@ -207,7 +242,6 @@ public class ModelController : MonoBehaviour {
 
 			player = new Player(JsonUtility.FromJson<PlayerDBModel>(local_data));
 			Debug.Log(string.Format("** Player me > {0}", player.ToString()));
-
 		} catch (FileNotFoundException e) {
 			Debug.Log ("** No local data found, creating a new Player...");
 
@@ -222,8 +256,54 @@ public class ModelController : MonoBehaviour {
 	}
 
 
-	// Access to the player.
+	/// <summary>
+	/// Builds the request.
+	/// </summary>
+	/// <returns>The request.</returns>
+	/// <param name="url">API's URL.</param>
+	/// <param name="form">Form (optional)</param>
+	public WWW buildRequest(string url, WWWForm form = null){
+		url = BASE_URL + url;
+		Debug.Log(string.Format("** Request URL : {0}", url));
+		WWW request = new WWW(url);
+
+		if (form != null) {
+			request = new WWW(url, form);
+		}
+			
+		return request;
+	}
+
+
+	/// <summary>
+	/// Gets the first element from JSON string.
+	/// </summary>
+	/// <returns>The first JSON string.</returns>
+	/// <param name="json">Json.</param>
+	public string getFirstFromJSONString(string json){
+		JSONObject result = new JSONObject (json);
+		result = (JSONObject)result.list [0];
+		return result.Print();
+	}
+
+
+	/// <summary>
+	/// Gets the player.
+	/// </summary>
+	/// <value>The player.</value>
 	public Player Player{
 		get { return this.player;}
+	}
+
+
+	/// <summary>
+	/// Player sent his message ?
+	/// </summary>
+	/// <returns><c>true</c>, if sent was sent, <c>false</c> otherwise.</returns>
+	public bool isSent(){
+		bool is_sent = false;
+		if (Player == null) return is_sent;
+
+		return (player.MyRecord != null);
 	}
 }

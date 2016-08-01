@@ -20,6 +20,21 @@ public class Record{
 
 
 
+	/// <summary>
+	/// Properties.
+	/// </summary>
+	public int Id {
+		get {
+			return this.id;
+		}
+	}
+
+	public string Data{
+		get {
+			return this.data;
+		}
+	}
+
 	//	Standardize the display of infos
 	public override string ToString()
 	{

@@ -40,7 +40,11 @@ public class Player{
 
 
 	// Properties.
-	public int Id{ get; set;}
+	public int Id{
+		get{
+			return this.id;
+		}
+	}
 
 	public int SharingId{ get; set;}
 
