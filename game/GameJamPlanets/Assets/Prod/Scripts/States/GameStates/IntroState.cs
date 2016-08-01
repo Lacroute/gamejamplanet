@@ -21,6 +21,7 @@ public class IntroState : IGameState
 	{
 		Debug.Log ("Before Entering introState");
 		GameObject.Find ("P_GameManager").GetComponent<GUIManager> ().StartCoroutine ("LaunchIntro");
+		Debug.Log (GameObject.Find ("P_GameManager").GetComponent<ModelController>().Player.MyColor);
 	}
 
 	public void DoBeforeLeaving()
@@ -31,6 +32,7 @@ public class IntroState : IGameState
 		// Si y'a déjà un player ou non 
 		// s'il a déjà hosté ou non un record
 		// S'il a un record en voyage ou non
+
 
 
 			
