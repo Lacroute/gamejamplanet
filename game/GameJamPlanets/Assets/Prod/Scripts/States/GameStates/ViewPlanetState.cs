@@ -19,12 +19,12 @@ public class ViewPlanetState : IGameState
 
 	public void DoBeforeEntering()
 	{
-		Debug.Log ("Before Leaving " + gameManager.currentState);
+		Debug.Log ("Before Entering " + gameManager.currentState);
 	}
 
 	public void DoBeforeLeaving()
 	{
-		Debug.Log ("Before Entering " + gameManager.currentState);
+		Debug.Log ("Before Leaving " + gameManager.currentState);
 
 	}
 

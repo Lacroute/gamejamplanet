@@ -29,13 +29,10 @@ public class ModelController : MonoBehaviour {
 	private Player player;
 	public Record tmp_record;
 
-
-
 	// Init.
 	void Start () {
-		Debug.Log ("START");
+
 		initPlayer ();
-		Debug.Log ("END START");
 
 		/// Everything is stored in the managner
 		///   >  to access to the player call my_model_controller.Player
