@@ -32,21 +32,6 @@ public class ModelController : MonoBehaviour {
 	// Init.
 	void Start () {
 		initPlayer ();
-
-		/// Everything is stored in the managner
-		///   >  to access to the player call my_model_controller.Player
-		///   >  to access to the tmp_record call my_model_controller.TmpRecord
-		/// 
-		/// 
-		/// get the player > StartCoroutine(findMe());
-		/// 
-		/// get the record of the player > StartCoroutine(findMyRecord());
-		/// 
-		/// get a random record from space > StartCoroutine(listenToSpace());
-		/// 
-		/// Update the database with the shared record > StartCoroutine(shareRecord(id_new_record));
-		/// 
-		/// isSent > isSent()
 	}
 
 
@@ -214,6 +199,28 @@ public class ModelController : MonoBehaviour {
 		{
 			Debug.Log(string.Format("** ERROR Request: {0}", request.text));
 		} 
+	}
+
+
+
+	/// <summary>
+	/// Create the record.
+	/// </summary>
+	/// <returns>The record.</returns>
+	/// <param name="data">Data.</param>
+	IEnumerator createRecord(string data) {
+		WWWForm form = new WWWForm();
+		form.AddField("data", data);
+
+		WWW request = buildRequest ("Players/" + player.Id + "/author", form);
+		yield return request;
+
+		if (request.error == null) {
+			player.MyRecord = new Record (JsonUtility.FromJson<RecordDBModel> (request.text));
+			Debug.Log(string.Format("** MyRecord created > {0}", player.ToString()));
+		} else {
+			Debug.Log(string.Format("** ERROR Request: {0}", request.text));
+		}
 	}
 
 
